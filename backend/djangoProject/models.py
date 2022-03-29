@@ -1,17 +1,23 @@
 from django.db import models
+from django.core.validators import validate_email
+from rest_framework.serializers import ValidationError
+from djangoProject.app.validators.sha256_validator import sha256_validator
+
+#Модели Django
 
 class User(models.Model):
     name = models.CharField(max_length=256, unique=True)
-    email = models.CharField(max_length=256)
-    pass_cache = models.CharField(max_length=256)
+    email = models.CharField(max_length=256, unique=True, validators=[validate_email])
+    pass_cache = models.CharField(max_length=256, validators=[sha256_validator])
     session_uuid = models.CharField(max_length=256)
     registration_at = models.IntegerField()
-    sugar_all_time = models.IntegerField()
-    balance = models.IntegerField()
+    sugar_all_time = models.IntegerField(default=0)
+    balance = models.IntegerField(default=0)
     last_passive_income_data = models.IntegerField()
 
     def __str__(self):
         return self.name
+
 
 class Provider(models.Model):
     name = models.CharField(max_length=256)
