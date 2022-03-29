@@ -1,15 +1,16 @@
 from django.db import models
 from django.core.validators import validate_email
 from rest_framework.serializers import ValidationError
-from djangoProject.app.validators.sha256_validator import sha256_validator
+from djangoProject.app.validators.sha256_validator import validate_sha256
+from djangoProject.app.validators.uuid_validator import validate_uuid
 
 #Модели Django
 
 class User(models.Model):
     name = models.CharField(max_length=256, unique=True)
     email = models.CharField(max_length=256, unique=True, validators=[validate_email])
-    pass_cache = models.CharField(max_length=256, validators=[sha256_validator])
-    session_uuid = models.CharField(max_length=256)
+    pass_cache = models.CharField(max_length=256, validators=[validate_sha256])
+    session_uuid = models.CharField(max_length=256, validators=[validate_uuid])
     registration_at = models.IntegerField()
     sugar_all_time = models.IntegerField(default=0)
     balance = models.IntegerField(default=0)
