@@ -46,7 +46,7 @@ services:
     build:
         context: ../../
         dockerfile: ./docker/sugar-clicker_instances/dockerfiles/django.Dockerfile
-    command: bash -c "python manage.py runserver 0.0.0.0:8000 && python manage.py makemigrations && python manage.py migrate"
+    command: bash -c "python manage.py runserver 0.0.0.0:8000 && python manage.py makemigrations djangoProject && python manage.py migrate"
     volumes:
       - ../../backend/:/usr/src/app/
     ports:
