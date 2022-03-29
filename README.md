@@ -63,6 +63,7 @@ Sugar Clicker - веб-игра с открытым исходным кодом 
 Путь: ```frontend/js/classes/BackendConnector.js```
 Измените строку 
 ```js
-this.domain = "https://localhost:82"
+this.domain = "https://localhost:82/api/"
 ``` 
-В переменную this.domain напишите ваш адрес REST.api
+В переменную this.domain напишите ваш адрес REST.api, не забудьте добавить путь api
+
