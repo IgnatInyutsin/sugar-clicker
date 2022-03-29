@@ -1,0 +1,16 @@
+@media screen and (max-width: 768px) {
+    .mobile {
+        display: block;
+    }
+    .desktop {
+        display: none;
+    }
+    .ascending-descending {
+        margin-top: 20px;
+    }
+}
+@media screen and (max-width: 1083px) {
+    .ascending-descending {
+        margin-top: 20px;
+    }
+}

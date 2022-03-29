@@ -1,0 +1,58 @@
+.swagger-ui table.model tbody tr td:first-of-type {
+    width: 50px !important;
+}
+
+.swagger-ui .model-box {
+    display: block
+}
+
+.swagger-ui .opblock-description-wrapper p, .swagger-ui
+.opblock-external-docs-wrapper p, .swagger-ui .opblock-title_normal p {
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.swagger-ui .model-title {
+    font-size: 12px;
+}
+
+.swagger-ui table.model tr.description td:first-child {
+    color: transparent;
+    border-left: 3px #888 solid;
+}
+
+.swagger-ui table.model tr.description td {
+    padding: 0px !important;
+    background: rgba(0,0,0,.05)
+/*    border-bottom: 1px #AAA solid; */
+}
+
+tr.property-row td{
+    padding-top: 10px !important;
+}
+
+.swagger-ui .markdown p, .swagger-ui .markdown pre, .swagger-ui
+.renderedMarkdown p, .swagger-ui .renderedMarkdown pre, .swagger-ui
+.renderedMarkdown li {
+    margin-top: 0.5em;
+    font-weight: normal;
+    font-size: 12px;
+}
+
+.model .description .renderedMarkdown p {
+    position: relative;
+    left: -80px;
+}
+
+
+
+table.model{
+    border-left: 1px #AAA dashed;
+}
+
+.swagger-ui table.model tbody tr td:first-of-type {
+    width: 50px;
+    padding: 0 1em 0 0.5em;
+}
+
+

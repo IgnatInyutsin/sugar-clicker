@@ -1,0 +1,19 @@
+openapi: "3.0.0"
+
+info:
+  title: Пример документации
+  description: Описание примера документации
+  version: "1.0"
+
+servers:
+  - url: "http://localhost:81/"
+  - url: "http://localhost:82/"
+  - url: "http://localhost:83/"
+
+tags:
+  - name: greetings
+    description: "Приветствия"
+
+paths:
+  /greetings/ping:
+      $ref: ./view/greeting_ping.yaml

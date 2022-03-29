@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+	   <meta charset="utf-8">
+       <meta http-equiv="Cache-Control" content="no-cache">
+	   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+       <meta name="yandex-verification" content="ed4b1ac59362c3a8" />
+        <!-- Подключение angular и JQuery-->
+        <script src="js/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script src="js/libs/angularjs/1.6.9/angular-route.js"></script>
+        <script src="js/libs/angularjs/1.6.9/angular-cookies.js"></script>
+        <script src="js/libs/angularjs/1.6.9/angular-sanitize.min.js"></script>
+        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <!-- Подключение файла для подмены основной части контента -->
+        <script src="js/routes.js"></script>
+        <script src="js/controllers/common.js"></script>
+        <script src="js/controllers/index.js"></script>
+        <script src="js/controllers/registration.js"></script>
+        <script src="js/controllers/profile.js"></script>
+        <script src="js/controllers/rating.js"></script>
+        <script src="js/controllers/faq.js"></script>
+        <script src="js/controllers/providers.js"></script>
+        <script src="js/controllers/admins.js"></script>
+        <script src="js/controllers/footer.js"></script>
+        <!-- Подключение ООП структур -->
+        <script src="js/classes/BackendConnector.js"></script>
+        <!-- Подключение Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <!-- Подключение css -->
+        <link href="css/desktop.css" rel="stylesheet">
+        <link href="css/mobile.css" rel="stylesheet">
+    </head>
+
+    <body ng-app="main" ng-controller="common" ng-class="{'loaded':isLoaded}">
+
+        <div class="blocked" style="display:none;"></div>
+        <!-- Основная часть -->
+        <div class="wrap">
+            <!-- Подключение шапки -->
+            <header ng-include="'views/includes/header.html'"></header>
+            <!-- Основной блок страницы -->
+            <div class="main">
+                <div ng-view class="main-content"></div>
+            </div>
+            <!-- Подключение футера -->
+            <footer ng-include="'views/includes/footer.html'" ng-controller="footer"></footer>
+        </div>
+    </body>
+</html>

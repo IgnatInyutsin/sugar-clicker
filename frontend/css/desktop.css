@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body, html, .main, .main-content {
+    height: 100%;
+    width: 100%;
+}
+
+.wrap {
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.vertical_center_wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile_parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.card.profile {
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
+    margin: 20px;
+}
+.btn-group, .btn-group-vertical {
+    margin-left: 20px;
+}
+.btn-group-vertical {
+    width: 90%;
+    margin-right: 5%;
+    margin-left: 5%;
+}
+.mobile {
+    display: none;
+}
+.margins {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.card.shop-size {
+    max-width: 250px;
+}
+body, .wrap {
+    background-color: #eee;
+}
+.main-image {
+    position: relative;
+    max-width: 400px;
+    width: 100% ;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+.main-card {
+    height: 80vh;
+}
+.success-passive {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    margin: 5px 5px 5px 5px
+}

@@ -1,0 +1,3 @@
+#!/bin/bash
+cd ../docker/sugar-clicker_instances/
+docker-compose exec backend bash

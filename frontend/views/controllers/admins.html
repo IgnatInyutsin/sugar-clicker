@@ -1,0 +1,15 @@
+<div class="profile-parent center margins" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center">
+    <div ng-repeat="admin in adminsList">
+        <div class="card profile shop-size">
+            <div class="card-header">{{admin.name}}</div>
+            <div class="card-body">
+                <p><b>Стоимость:</b> {{admin.cost}} пакет(a/ов)</p>
+                <p><b>Прибавка к проценту администрации:</b> {{admin.profit}}%</p>
+                <form class="d-flex" style="justify-content: end;">
+                    <input class="form-control me-4" type="number" placeholder="К-во шт" aria-label="">
+                    <button class="btn btn-outline-success" type="submit">Купить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

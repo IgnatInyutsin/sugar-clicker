@@ -1,0 +1,80 @@
+version: '3'
+services:
+  webserver:
+    image: 
+      nginx:alpine
+    restart: 
+      always
+    tty: 
+      true
+    ports:
+      - "$WEBSERVER_PORT:80"
+    networks:
+      - net
+    volumes:
+      - ../../frontend/:/usr/share/nginx/html
+  
+  swagger:
+    image:
+      nginx:alpine
+    restart:
+      always
+    tty:
+      true
+    ports:
+      - "$SWAGGER_PORT:80"
+    networks:
+      - net
+    volumes:
+      - ../../swagger/:/usr/share/nginx/html
+
+
+  pg_db:
+    image: 
+      postgres:13.1
+    restart: 
+      always
+    environment:
+      POSTGRES_PASSWORD: $DB_PASS
+      POSTGRES_USER: $DB_USER
+      POSTGRES_DB: $DB_NAME
+    volumes:
+      - db:/var/lib/postgresql/data
+    ports:
+      - "$DB_PORT:5432"
+
+  pgmyadmin:
+    image:
+      dpage/pgadmin4
+    ports:
+      - "$PGADMIN_PORT:80"
+    environment:
+      PGADMIN_DEFAULT_PASSWORD: $PGADMIN_PASSWORD
+      PGADMIN_DEFAULT_EMAIL: $PGADMIN_EMAIL
+
+
+  backend:
+    build:
+        context: ../../
+        dockerfile: ./docker/sugar-clicker_instances/dockerfiles/django.Dockerfile
+    command: bash -c "python manage.py runserver 0.0.0.0:8000; python manage.py makemigrations; python manage.py migrate"
+    volumes:
+      - ../../backend/:/usr/src/app/
+    ports:
+      - "$DJANGO_PORT:8000"
+    env_file:
+      - .env
+    depends_on:
+      - pg_db
+      
+volumes:
+  db:
+
+networks:
+  net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        -
+          subnet: $NETWORK

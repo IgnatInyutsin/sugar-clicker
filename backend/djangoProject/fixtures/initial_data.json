@@ -1,0 +1,110 @@
+[
+  {
+    "model": "djangoProject.admin",
+    "pk": 1,
+    "fields": {
+      "name": "Я у мамы сис админ",
+      "cost": 50,
+      "profit": 1
+    }
+  },
+  {
+    "model": "djangoProject.admin",
+    "pk": 2,
+    "fields": {
+      "name": "Таджик",
+      "cost": 90,
+      "profit": 2
+    }
+  },
+  {
+    "model": "djangoProject.admin",
+    "pk": 3,
+    "fields": {
+      "name": "Стажер",
+      "cost": 170,
+      "profit": 4
+    }
+  },
+  {
+    "model": "djangoProject.admin",
+    "pk": 4,
+    "fields": {
+      "name": "Работник за еду",
+      "cost": 330,
+      "profit": 8
+    }
+  },
+  {
+    "model": "djangoProject.admin",
+    "pk": 5,
+    "fields": {
+      "name": "Подрабатывает между парами",
+      "cost": 650,
+      "profit": 16
+    }
+  },
+  {
+    "model": "djangoProject.admin",
+    "pk": 6,
+    "fields": {
+      "name": "Хороший работник",
+      "cost": 1290,
+      "profit": 32
+    }
+  },
+  {
+    "model": "djangoProject.provider",
+    "pk": 1,
+    "fields": {
+      "name": "Бабушка-перекуп",
+      "cost": 180,
+      "income": 1
+    }
+  },
+  {
+    "model": "djangoProject.provider",
+    "pk": 2,
+    "fields": {
+      "name": "Мамкин бизнесмен",
+      "cost": 360,
+      "income": 2
+    }
+  },
+  {
+    "model": "djangoProject.provider",
+    "pk": 3,
+    "fields": {
+      "name": "Барыга с Авито",
+      "cost": 720,
+      "income": 4
+    }
+  },
+  {
+    "model": "djangoProject.provider",
+    "pk": 4,
+    "fields": {
+      "name": "ООО 'Ватиканская грядочка'",
+      "cost": 1440,
+      "income": 8
+    }
+  },
+  {
+    "model": "djangoProject.provider",
+    "pk": 5,
+    "fields": {
+      "name": "Мексиканский сахаро-корель",
+      "cost": 2880,
+      "income": 16
+    }
+  },
+  {
+    "model": "djangoProject.provider",
+    "pk": 6,
+    "fields": {
+      "name": "Немамкин бизнесмен",
+      "cost": 5760,
+      "income": 32
+    }
+  }
+]

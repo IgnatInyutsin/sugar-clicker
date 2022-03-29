@@ -1,0 +1,206 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "",
+    "version": "1.0.0",
+    "title": "МИЛП Api",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/mit-license.php"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://dev-service-shoplnp.ag.mos.ru/api",
+      "description": "dev-контур"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Frontend",
+      "description": "Методы для раздела покупателей",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://swagger.io"
+      }
+    },
+    {
+      "name": "Backend",
+      "description": "Методы для раздела партнёров и администраторов"
+    },
+    {
+      "name": "Service",
+      "description": "Методы для обслуживания системы"
+    }
+  ],
+  "paths": {
+    "/ping": {
+      "post": {
+        "tags": [
+          "Service"
+        ],
+        "summary": "Проверка доступности системы",
+        "description": "",
+        "operationId": "ping",
+        "requestBody": {
+          "description": "Описание",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ping_Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Корректный ответ",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ping_Response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/front/code/activated": {
+      "post": {
+        "tags": [
+          "Frontend"
+        ],
+        "summary": "Проверка баланса пользователя",
+        "description": "",
+        "operationId": "front_code_activated",
+        "requestBody": {
+          "description": "Описание",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AG_Auth_Block"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Корректный ответ",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/front_code_activated_response"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "response200": {
+        "title": "Ответ сервера при успешной оработке запроса",
+        "properties": {
+          "errorCode": {
+            "type": "integer",
+            "description": "Код ошибки",
+            "default": 0
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "Сообщение об ошибке",
+            "example": ""
+          },
+          "execTime": {
+            "type": "number",
+            "description": "Время обработки запроса (в секундах)",
+            "example": 0.123456789
+          },
+          "result": {
+            "type": "object",
+            "description": "Результат обработки запроса"
+          }
+        }
+      },
+      "Admin_Auth_Block": {
+        "title": "Блок авторизации партнёра/администратора",
+        "type": "object",
+        "required": [
+          "token"
+        ],
+        "properties": {
+          "token": {
+            "type": "string",
+            "example": "cf3b03d7e9af595a344b97195823125b5fc69438"
+          }
+        }
+      },
+      "AG_Auth_Block": {
+        "title": "Блок авторизации покупателя",
+        "type": "object",
+        "required": [
+          "ag_session_id"
+        ],
+        "properties": {
+          "ag_session_id": {
+            "type": "string",
+            "example": "cf3b03d7e9af595a344b97195823125b5fc69438"
+          }
+        }
+      },
+      "Ping_Request": {
+        "title": "Запрос доступности сервера",
+        "properties": {
+          "blabla": {
+            "example": "blabla123"
+          }
+        }
+      },
+      "Ping_Response": {
+        "title": "Ответ метода ping",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/response200"
+          }
+        ],
+        "properties": {
+          "result": {
+            "$ref": "#/components/schemas/Ping_Request"
+          }
+        }
+      },
+      "front_code_activated_response": {
+        "title": "Ответ метода front/code/activated",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/response200"
+          }
+        ],
+        "properties": {
+          "result": {
+            "type": "object",
+            "properties": {
+              "codes": {
+                "type": "object"
+              },
+              "points": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}

@@ -1,0 +1,28 @@
+get:
+  summary: Пинг приветствия
+  description: Проверяет ветку /greetings/ на работоспособность
+
+  tags:
+    - greetings
+
+  responses:
+
+    "200":
+      description: Приветствие успешно получено!
+      content:
+        application/json:
+          schema:
+            type: object
+            description: Приветствие
+            required:
+              - id
+              - text
+            properties:
+              id:
+                description: Уникальное id приветствия
+                type: number
+                example: 1
+              text:
+                description: Текст приветствия
+                type: string
+                example: Hello World!

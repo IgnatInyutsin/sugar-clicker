@@ -1,0 +1,22 @@
+<div class="card text-black margins">
+    <div class="card-header">Предупреждение</div>
+    <div class="card-body">
+        Доход указан для 100% администрации
+    </div>
+</div>
+
+<div class="profile-parent center margins" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center">
+    <div ng-repeat="provider in providersList">
+        <div class="card profile shop-size">
+            <div class="card-header">{{provider.name}}</div>
+            <div class="card-body">
+                <p><b>Стоимость:</b> {{provider.cost}} пакет(а/ов)</p>
+                <p><b>Доход/сек:</b> {{provider.income}} пакет(a/ов)</p>
+                <form class="d-flex" style="justify-content: end;">
+                    <input class="form-control me-4" type="number" placeholder="К-во шт" aria-label="">
+                    <button class="btn btn-outline-success" type="submit">Купить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
