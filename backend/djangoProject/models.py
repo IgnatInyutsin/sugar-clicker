@@ -1,16 +1,14 @@
 from django.db import models
 from django.core.validators import validate_email
 from rest_framework.serializers import ValidationError
-from djangoProject.app.validators.sha256_validator import validate_sha256
-from djangoProject.app.validators.uuid_validator import validate_uuid
 
-#Модели Django
+# Модели Django
 
 class User(models.Model):
     name = models.CharField(max_length=256, unique=True)
     email = models.CharField(max_length=256, unique=True, validators=[validate_email])
-    pass_cache = models.CharField(max_length=256, validators=[validate_sha256])
-    session_uuid = models.CharField(max_length=256, validators=[validate_uuid])
+    pass_cache = models.CharField(max_length=256)
+    session_uuid = models.CharField(max_length=256)
     registration_at = models.IntegerField()
     sugar_all_time = models.IntegerField(default=0)
     balance = models.IntegerField(default=0)
@@ -37,17 +35,18 @@ class Admin(models.Model):
         return self.name
 
 class ProvidersGroup(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE,)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,)
     count = models.IntegerField
-    provider_id = models.ForeignKey(Provider, on_delete=models.CASCADE,)
+    provider = models.ForeignKey(Provider, on_delete=models.CASCADE,)
 
     def __str__(self):
         return self.provider_id
 
 class AdminsGroup(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    count = models.IntegerField
-    admin_id = models.ForeignKey(Admin, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    count = models.IntegerField()
+    admin = models.ForeignKey(Admin, on_delete=models.CASCADE)
+    __name__ = "AdminsGroup"
 
     def __str__(self):
-        return self.admin_id
+        return str(self.id)
