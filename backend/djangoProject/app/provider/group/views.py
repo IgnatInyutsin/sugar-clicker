@@ -1,17 +1,17 @@
 from rest_framework import viewsets
 from rest_framework.response import Response
-from djangoProject.app.admin.group.serializer import AdminsGroupSerializer
+from djangoProject.app.provider.group.serializer import ProvidersGroupSerializer
 from djangoProject.app.user.models import User
-from djangoProject.app.admin.models import Admin, AdminsGroup
+from djangoProject.app.provider.models import Provider, ProvidersGroup
 from rest_framework.serializers import ValidationError
 import time
 from django.core import serializers
 
 # Класс для запросов по AdminsGroup, доступен только POST и GET
-class AdminsGroupViewSet(viewsets.ModelViewSet):
+class ProvidersGroupViewSet(viewsets.ModelViewSet):
     #связываем с сериализатором
-    queryset = AdminsGroup.objects.all().order_by('id')
-    serializer_class = AdminsGroupSerializer
+    queryset = ProvidersGroup.objects.all().order_by('id')
+    serializer_class = ProvidersGroupSerializer
 
     # метод POST
     def create(self, request):
@@ -23,30 +23,30 @@ class AdminsGroupViewSet(viewsets.ModelViewSet):
             # но она не работает, так что пусть сделает здесь)
             if User.objects.all().filter(session_uuid=request.POST['user.session_uuid']).exists():
                 raise ValidationError([{"code": "SESSION_UUID_UNDEFINED", "text": "session_uuid in undefinded"}])
-            if Admin.objects.all().filter(id=request.POST['admin.id']).exists():
-                raise ValidationError([{"code": "ADMIN_ID_UNDEFINED", "text": "admin_id in undefinded"}])
+            if Provider.objects.all().filter(id=request.POST['provider.id']).exists():
+                raise ValidationError([{"code": "PROVIDER_ID_UNDEFINED", "text": "provider_id in undefinded"}])
 
             # по session_id соединяем с User
             user_for_update = User.objects.all().filter(session_uuid=request.POST['user.session_uuid'])
             user = User.objects.all().filter(session_uuid=request.POST['user.session_uuid'])[0]
             # по id соединяем с Admin
-            admin = Admin.objects.all().filter(id=request.POST['admin.id'])[0]
+            provider = Provider.objects.all().filter(id=request.POST['provider.id'])[0]
 
             # проверяем, достаточная ли сумма на балансе
-            if int(user.balance) >= int(admin.cost) * int(request.data['count']):
+            if int(user.balance) >= int(provider.cost) * int(request.data['count']):
                 # если да - снимаем нужную сумму с баланса
-                user_for_update.update(balance=(int(user.balance) - int(admin.cost) * int(request.data['count'])))
+                user_for_update.update(balance=(int(user.balance) - int(provider.cost) * int(request.data['count'])))
             else:
                 # иначе - ошибка
                 raise ValidationError([{'code': 'SMALL_BALANCE', 'text': 'You do not have money'}])
 
             # Проверка на наличие группы. Если уже есть - обновляем, иначе - создаем.
-            if not AdminsGroup.objects.all().filter(user=user).filter(admin=admin).exists():
-                adminGroup = AdminsGroup(user=user, admin=admin, count=request.data['count'])
-                adminGroup.save()
+            if not ProvidersGroup.objects.all().filter(user=user).filter(provider=provider).exists():
+                providersGroup = ProvidersGroup(user=user, provider=provider, count=request.data['count'])
+                providersGroup.save()
             else:  # иначе обновляем
-                myAdminsGroup = AdminsGroup.objects.all().filter(user=user).filter(admin=admin)
-                myAdminsGroup.update(count=(int(myAdminsGroup[0].count) + int(request.data['count'])))
+                myProvidersGroup = ProvidersGroup.objects.all().filter(user=user).filter(provider=provider)
+                myAdminsGroup.update(count=(int(myProvidersGroup[0].count) + int(request.data['count'])))
             # Здесь будет автоматический сбор пассивного дохода
 
             # если все успешно возвращаем ответ
