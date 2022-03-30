@@ -7,7 +7,7 @@ from rest_framework.serializers import ValidationError
 import time
 from django.core import serializers
 
-# Класс для запросов по регистрации, доступен только POST
+# Класс для запросов по AdminsGroup, доступен только POST и GET
 class AdminsGroupViewSet(viewsets.ModelViewSet):
     #связываем с сериализатором
     queryset = AdminsGroup.objects.all().order_by('id')

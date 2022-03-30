@@ -31,10 +31,13 @@
                     <a class="nav-link" href="#!/faq/">FAQ</a>
                 </li>
             </ul>
-            <form class="d-flex" style="justify-content: center;">
+            <form class="d-flex" style="justify-content: center;" ng-if="!login">
                 <input class="form-control me-6" type="text" placeholder="Почта/логин" aria-label="Почта/логин">
                 <input class="form-control me-6" type="password" placeholder="Пароль" aria-label="Пароль">
                 <button class="btn btn-outline-success" type="submit">Войти</button>
+            </form>
+            <form class="d-flex" style="justify-content: center;" ng-if="login" ng-click="logoutClick()">
+                <button class="btn btn-outline-success" type="submit">Выйти</button>
             </form>
         </div>
     </div>

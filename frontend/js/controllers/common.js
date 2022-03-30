@@ -11,4 +11,11 @@ main.controller('common', function ($scope, $http, $location, $cookies, $timeout
     }
 
     if (document.location.hash == "") document.location.hash = '!/index/'; //если переходят по пустому хэшу то редирект на главную страницу
+
+    //проверка, зашел ли человек в аккаунт
+    if (!$cookies.get('session')) {
+        $scope.login = false;
+    } else {
+        $scope.login = true;
+    }
 });
