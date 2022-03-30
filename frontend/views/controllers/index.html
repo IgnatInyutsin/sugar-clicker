@@ -1,8 +1,9 @@
 <div class="card text-black margins">
     <div class="card-header">Кликер</div>
     <div class="card-body">
-        <p style="text-align: center"><b>Баланс:</b> 300 пакет(а/ов)</p>
-        <button type="button" class="btn btn-primary btn-lg" style="width: 80%; margin-left: 10%; margin-right: 10%; margin-bottom: 20px;">Стащить один пакет</button>
+        <p style="text-align: center"><b>Пакетов накликано:</b> {{sugarClicks}}</p>
+        <button type="button" class="btn btn-primary btn-lg" style="width: 80%; margin-left: 10%; margin-right: 10%; margin-bottom: 20px;" ng-click="sugarAddClick()">Стащить один пакет</button>
+        <button type="button" class="btn btn-success btn-lg" style="width: 80%; margin-left: 10%; margin-right: 10%; margin-bottom: 20px;" ng-click="sugarRemoveClick()">Забрать взятые пакеты в баланс</button>
         <button type="button" class="btn btn-secondary btn-lg" style="width: 80%; margin-left: 10%; margin-right: 10%;">Собрать пассивный доход</button>
     </div>
 </div>

@@ -5,6 +5,8 @@ main.controller('common', function ($scope, $http, $location, $cookies, $timeout
 
     $scope.showUpButton = false; // Кнопка перемотки вверх
 
+    $scope.sugarClicks = 0; // обновляем значение накликанных пакетов
+
     $scope.pageTop = function () { // Функция перемотки вверх
         $("html, body").animate({scrollTop: 0}, 600);
         return false;

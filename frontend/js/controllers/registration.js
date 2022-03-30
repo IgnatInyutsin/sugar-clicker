@@ -43,12 +43,13 @@ main.controller('registration', function ($scope, $http, $location, $cookies) {
         var uuid = api.uuidv4();
 
         $.ajax({
-            url: urls.domain + 'user/',
+            url: urls.domain + 'user/list/',
             method: 'post',
             datatype: 'application/json',
             data: {name: nickname, email: email, pass_cache: pass_cache, session_uuid: uuid},
             success: function (data) {
                 //в случае успеха - редирект и перезагрузка, срабатывает проверка на вход модуля common
+                $cookies.put('user_id', data.id)
                 $cookies.put('session', uuid)
                 document.location.hash = "";
                 location.reload();

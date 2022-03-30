@@ -41,7 +41,7 @@ class LoginViewSet(viewsets.ModelViewSet):
 
             # если прошли проверки, то меняем session_id и возвращаем обновленного пользователя
             User.objects.all().filter(email=request.data["email"]).update(session_uuid=request.data["session_uuid"])
-            return Response(status=201, data={"code": "SUCCESS_LOGIN", "text": "Login is success!"})
+            return Response(status=201, data={"code": "SUCCESS_LOGIN", "text": "Login is success!", "user_id": User.objects.all().filter(email=request.data["email"])[0].id})
 
         # Если не прошли валидацию сериалайзера - возвращаем 400
         raise ValidationError(serializer.errors)

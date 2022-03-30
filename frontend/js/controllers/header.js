@@ -38,6 +38,7 @@ main.controller('header', function ($scope, $http, $location, $cookies) {
             data: {email: email, pass_cache: pass_cache, session_uuid: uuid},
             success: function (data) {
                 // в успешном случае добавляем кук сессии и обновляемся
+                $cookies.put("user_id", data.user_id)
                 $cookies.put("session", uuid);
                 location.hash = "!/index/"
                 location.reload();
