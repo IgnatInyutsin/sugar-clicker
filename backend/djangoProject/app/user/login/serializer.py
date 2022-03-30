@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from djangoProject.models import User
+from djangoProject.app.user.models import User
 
 # Сериализатор для логина
 class LoginSerializer(serializers.HyperlinkedModelSerializer):

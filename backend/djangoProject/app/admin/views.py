@@ -1,16 +1,16 @@
 from rest_framework import viewsets
 from rest_framework.response import Response
-from djangoProject.app.serializers.provider_shop import ProviderShopSerializer
-from djangoProject.models import Provider
+from djangoProject.app.admin.serializer import AdminShopSerializer
+from djangoProject.app.admin.models import Admin
 
-#класс для запросов на провайдера, доступен только get
-class ProviderViewSet(viewsets.ModelViewSet):
-    queryset = Provider.objects.all().order_by('id')
-    serializer_class = ProviderShopSerializer
-
+#класс для запросов на админа, доступен только get
+class AdminViewSet(viewsets.ModelViewSet):
+    queryset = Admin.objects.all().order_by('id')
+    serializer_class = AdminShopSerializer
+    
     def create(self, request):
         return Response(status=405,
-                        data={"code": "INVALID_METHOD", "error_text": "Method is invalid for this path"})
+                            data={"code": "INVALID_METHOD", "error_text": "Method is invalid for this path"})
 
     def retrieve(self, request, pk=None):
         return Response(status=405,

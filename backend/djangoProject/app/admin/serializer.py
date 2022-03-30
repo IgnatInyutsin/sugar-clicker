@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from djangoProject.models import Admin
+from djangoProject.app.admin.models import Admin
 
 # Сериализатор для Админов
 class AdminShopSerializer(serializers.HyperlinkedModelSerializer):

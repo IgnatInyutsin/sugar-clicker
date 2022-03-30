@@ -32,7 +32,7 @@ main.controller('header', function ($scope, $http, $location, $cookies) {
         var uuid = api.uuidv4();
 
         $.ajax({
-            url: urls.domain + 'login/',
+            url: urls.domain + 'user/login/',
             method: 'post',
             datatype: 'application/json',
             data: {email: email, pass_cache: pass_cache, session_uuid: uuid},

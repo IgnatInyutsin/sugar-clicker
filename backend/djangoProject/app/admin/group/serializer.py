@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from djangoProject.models import AdminsGroup, User, Admin
+from djangoProject.app.admin.models import AdminsGroup, Admin
+from djangoProject.app.user.models import User
 from djangoProject.app.validators.user_id_validation import validate_user_id
 from djangoProject.app.validators.admin_id_validation import validate_admin_id
 from rest_framework.serializers import ValidationError

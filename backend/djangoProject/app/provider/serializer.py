@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from djangoProject.models import Provider
+from djangoProject.app.provider.models import Provider
 
 # Сериализатор для Поставщиков
 class ProviderShopSerializer(serializers.HyperlinkedModelSerializer):

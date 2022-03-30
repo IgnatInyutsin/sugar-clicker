@@ -1,4 +1,4 @@
-from djangoProject.models import User
+from djangoProject.app.user.models import User
 from rest_framework.serializers import ValidationError
 
 # Валидатор id user-а, проверяющий наличие такого пользователя в базе данных

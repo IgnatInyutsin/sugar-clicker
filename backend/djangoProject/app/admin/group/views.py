@@ -1,8 +1,8 @@
 from rest_framework import viewsets
 from rest_framework.response import Response
-from djangoProject.app.serializers.admins_group import AdminsGroupSerializer
-from djangoProject.models import User, AdminsGroup
-from djangoProject.models import Admin
+from djangoProject.app.admin.group.serializer import AdminsGroupSerializer
+from djangoProject.app.user.models import User
+from djangoProject.app.admin.models import Admin, AdminsGroup
 from rest_framework.serializers import ValidationError
 import time
 from django.core import serializers
@@ -66,6 +66,7 @@ class AdminsGroupViewSet(viewsets.ModelViewSet):
     def partial_update(self, request, pk=None):
         return Response(status=405,
                         data={"code": "INVALID_METHOD", "error_text": "Method is invalid for this path"})
+
 
     def destroy(self, request, pk=None):
         return Response(status=405,

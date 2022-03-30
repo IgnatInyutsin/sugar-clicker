@@ -42,9 +42,6 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'djangoProject',
-    'djangoProject.app',
-    'djangoProject.app.views',
-    'djangoProject.app.serializers',
 ]
 
 MIDDLEWARE = [
