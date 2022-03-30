@@ -56,17 +56,17 @@ class AdminsGroupViewSet(viewsets.ModelViewSet):
         raise ValidationError(serializer.errors)
 
     def retrieve(self, request, pk=None):
-        return Response(status=404,
+        return Response(status=405,
                         data={"code": "INVALID_METHOD", "error_text": "Method is invalid for this path"})
 
     def update(self, request, pk=None):
-        return Response(status=404,
+        return Response(status=405,
                         data={"code": "INVALID_METHOD", "error_text": "Method is invalid for this path"})
 
     def partial_update(self, request, pk=None):
-        return Response(status=404,
+        return Response(status=405,
                         data={"code": "INVALID_METHOD", "error_text": "Method is invalid for this path"})
 
     def destroy(self, request, pk=None):
-        return Response(status=404,
+        return Response(status=405,
                         data={"code": "INVALID_METHOD", "error_text": "Method is invalid for this path"})

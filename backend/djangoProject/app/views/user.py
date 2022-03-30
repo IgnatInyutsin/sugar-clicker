@@ -11,13 +11,13 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
     def destroy(self, request, pk=None):
-        return Response(status=404,
+        return Response(status=405,
                         data={"code": "INVALID_METHOD", "error_text": "Method is invalid for this path"})
 
     def partial_update(self, request, pk=None):
-        return Response(status=404,
+        return Response(status=405,
                         data={"code": "INVALID_METHOD", "error_text": "Method is invalid for this path"})
 
     def update(self, request, pk=None):
-        return Response(status=404,
+        return Response(status=405,
                         data={"code": "INVALID_METHOD", "error_text": "Method is invalid for this path"})

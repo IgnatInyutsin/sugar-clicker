@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from djangoProject.models import User
 
-# Сериализатор для Админов
+# Сериализатор для пользователей
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     session_uuid = serializers.CharField(write_only=True)
     pass_cache = serializers.CharField(write_only=True)

@@ -10,7 +10,14 @@ main.controller('common', function ($scope, $http, $location, $cookies, $timeout
         return false;
     }
 
-    if (document.location.hash == "") document.location.hash = '!/index/'; //если переходят по пустому хэшу то редирект на главную страницу
+    if (document.location.hash == "") {
+        if (!$cookies.get('session')) {
+            document.location.hash = '!/registration/'; //если переходят по пустому хэшу то редирект
+        } else {
+            document.location.hash = '!/index/';
+        }
+    }
+
 
     //проверка, зашел ли человек в аккаунт
     if (!$cookies.get('session')) {
