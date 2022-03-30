@@ -5,33 +5,13 @@ from djangoProject.models import User
 from rest_framework.serializers import ValidationError
 import time
 from django.core import serializers
+from datetime import datetime
 
 # Класс для запросов по регистрации, доступен только POST
 class UserRegViewSet(viewsets.ModelViewSet):
     #связываем с сериализатором
     queryset = User.objects.all().order_by('id')
     serializer_class = UserRegSerializer
-
-    # метод POST
-    def create(self, request):
-        # Получаем наш сериализатор
-        serializer = self.get_serializer(data=request.data)
-        # Проверяем, все ли поля прошли валидацию
-        if serializer.is_valid(raise_exception=True):
-            # Если да - сохраняем пользователя
-            user = User(
-                email=request.data['name'],
-                name=request.data['name'],
-                pass_cache=request.data['pass_cache'],
-                session_uuid=request.data['session_uuid'],
-                registration_at=time.time(),
-                last_passive_income_data=time.time()
-            )
-            user.save()
-            return Response(status=201, data={"code": "SUCCESS_ADD_USER", "text": "User is created"})
-
-        # Иначе возвращаем сообщение о всех ошибках
-        raise ValidationError(serializer.errors)
 
     def list(self, request, pk=None):
         return Response(status=404,
