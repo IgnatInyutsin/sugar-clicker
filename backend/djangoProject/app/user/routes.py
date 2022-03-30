@@ -5,7 +5,7 @@ from djangoProject.app.user.login.views import LoginViewSet
 
 #устанавливаем пути
 router = routers.DefaultRouter()
-router.register('list', UserViewSet)
+router.register('list',  UserViewSet)
 router.register('login', LoginViewSet)
 
 # Wire up our API using automatic URL routing.

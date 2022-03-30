@@ -4,6 +4,7 @@ from djangoProject.app.user.serializer import UserSerializer
 from djangoProject.app.user.models import User
 from rest_framework.serializers import ValidationError
 from djangoProject.app.validators.uuid_validation import validate_uuid
+from rest_framework.decorators import api_view
 
 #класс для запросов на пользователей
 class UserViewSet(viewsets.ModelViewSet):
@@ -16,8 +17,7 @@ class UserViewSet(viewsets.ModelViewSet):
                         data={"code": "INVALID_METHOD", "error_text": "Method is invalid for this path"})
 
     # обновление баланса
-    def partial_update(self, request, pk=None):
-        pk = int(request.path[15:].replace('/', ''))
+    def partial_update(self, request, pk):
         # проверяем наличие пользователя с этим id
         if not User.objects.all().filter(id=pk).exists():
             raise ValidationError([{"code": "UNDEFINED_USER", "text": "user is wrong"}])
