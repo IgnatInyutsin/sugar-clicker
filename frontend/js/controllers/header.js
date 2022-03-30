@@ -39,6 +39,7 @@ main.controller('header', function ($scope, $http, $location, $cookies) {
             success: function (data) {
                 // в успешном случае добавляем кук сессии и обновляемся
                 $cookies.put("session", uuid);
+                location.hash = "!/index/"
                 location.reload();
             },
             error: function (xhr) {
