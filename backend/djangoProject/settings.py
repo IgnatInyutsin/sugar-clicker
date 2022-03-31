@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.core.mail',
     'rest_framework',
     'corsheaders',
 
@@ -136,3 +137,10 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# настройки почтового сервера
+EMAIL_HOST = os.environ.get('SMTP_HOST')
+EMAIL_PORT = int(os.environ.get('SMTP_PORT'))
+EMAIL_USE_SSL = bool(int(os.environ.get("SMTP_USE_SSL")))
+EMAIL_HOST_USER = os.environ.get('EMAIL')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')

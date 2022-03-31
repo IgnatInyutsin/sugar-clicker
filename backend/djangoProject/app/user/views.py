@@ -5,6 +5,9 @@ from djangoProject.app.user.models import User
 from rest_framework.serializers import ValidationError
 from djangoProject.app.validators.uuid_validation import validate_uuid
 from rest_framework.decorators import api_view
+from django.core.mail import send_mail
+import uuid
+import os
 
 #класс для запросов на пользователей
 class UserViewSet(mixins.CreateModelMixin,
@@ -23,6 +26,36 @@ class UserViewSet(mixins.CreateModelMixin,
             return UserRegistrationSerializer
         else:
             return UserSerializer
+
+    # регистрация
+    def create(self, request, pk=None):
+        # Получаем наш сериализатор
+        serializer = self.get_serializer(data=request.data)
+        # Проверяем, все ли поля прошли валидацию
+        if serializer.is_valid(raise_exception=True):
+            # Генерируем аутенфикатор
+            auth = uuid.uuid4()
+            # Создаем пользователя
+            user = User(
+                name=request.data["name"],
+                email=request.data["email"],
+                pass_cache=request.data["pass_cache"],
+                auth=auth
+            )
+            user.save()
+
+            #отправляем на почту сообщение
+            send_mail('Аутентификация в SUGAR CLICKER',
+                        'http://' + request.get_host() + '/api/user/auth/' + str(auth) + '/ перейдите по этой ссылке, '
+                                                                             'чтобы подтвердить принадлежность этой почты к аккаунту SUGAR CLICK',
+                        os.environ.get("EMAIL"),
+                        [request.data["email"]],
+                        fail_silently=False)
+
+            #возвращаем сообщение об удачной регистрации
+            return Response(status=201, data={"code": "SUCCESSFULL_REGISTRATION_USER", "text": "User is created, please, check you email"})
+
+        raise ValidationError(serializer.errors)
 
     # обновление баланса
     def partial_update(self, request, pk):
@@ -46,6 +79,8 @@ class UserViewSet(mixins.CreateModelMixin,
             # ответ
             return Response(status=201, data={"code": "SUCCESS_UPDATE_BALANCE", "text": "Your balance are updated"})
 
+        raise ValidationError(serializer.errors)
+
     # обновление баланса
     def update(self, request, pk):
         # Получаем наш сериализатор
@@ -66,3 +101,5 @@ class UserViewSet(mixins.CreateModelMixin,
 
             # ответ
             return Response(status=201, data={"code": "SUCCESS_UPDATE_BALANCE", "text": "Your balance are updated"})
+
+        raise ValidationError(serializer.errors)

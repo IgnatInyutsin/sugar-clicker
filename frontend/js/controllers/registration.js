@@ -53,11 +53,25 @@ main.controller('registration', function ($scope, $http, $location, $cookies) {
             datatype: 'application/json',
             data: {name: nickname, email: email, pass_cache: pass_cache, session_uuid: uuid},
             success: function (data) {
-                //в случае успеха - редирект и перезагрузка, срабатывает проверка на вход модуля common
-                $cookies.put('user_id', data.id)
-                $cookies.put('session', uuid)
-                document.location.hash = "";
-                location.reload();
+                //в случае успеха
+                console.log(data);
+                document.querySelector("footer").insertAdjacentHTML('afterbegin', '<div class="modal" id="modal" aria-labelledby="modal"\n' +
+                    '     aria-hidden="true"\n' +
+                    '     style="position: fixed; width: 300px; left:50%; margin-left:-150px; display: flex; justify-content: space-between"\n' +
+                    '     tabindex="-1">\n' +
+                    '    <div class="modal-dialog">\n' +
+                    '        <div class="modal-content">\n' +
+                    '            <div class="modal-header">\n' +
+                    '                <h5 class="modal-title" id="exampleModalLabel">Регистрация</h5>\n' +
+                    '            </div>\n' +
+                    '            <div class="modal-body">\n' +
+                    '                Регистрация прошла успешно. Проверьте свою почту и перейдите по ссылке в письме для аутентификации своего\n' +
+                    '                аккаунта. Если вы не нашли письмо, проверьте папку "спам".\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '    </div>\n' +
+                    '</div>');
+                setTimeout(function () {document.getElementById('modal').remove(); location.hash = "!/faq/"}, 5000)
             },
             error: function (xhr) {
                 console.log(xhr)

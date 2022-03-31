@@ -22,9 +22,15 @@ class LoginViewSet(mixins.CreateModelMixin,
                  and serializer.errors.get("email", [0]) == 'user with this email already exists.' \
                  and not "balance", "session_uuid" in serializer.errors):
 
+
             # проверяем ее наличие в базе данных
             if not User.objects.all().filter(email=request.data["email"]).exists():
                 raise ValidationError([{"code": "MISSING_IN_DB_EMAIL", "text": "Email absent in database"}])
+
+            # проверяем активацию аккаунта
+            if not User.objects.get(email=request.data["email"]).is_auth:
+                raise ValidationError([{"code": "ACCOUNT_NOT_ACTIVATED", "text": "Account is not activated"}])
+
             # проверяем соответствие кэшей пароля
             if User.objects.get(email=request.data["email"]).pass_cache != request.data["pass_cache"]:
                 raise ValidationError([{"code": "WRONG_PASSWORD", "text": "Password is wrong"}])

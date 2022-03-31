@@ -11,7 +11,9 @@ class User(models.Model):
     sugar_all_time = models.IntegerField(default=0)
     balance = models.IntegerField(default=0)
     last_passive_income_data = models.IntegerField(default=time.time)
-    session_uuid = models.UUIDField(blank=True)
+    session_uuid = models.UUIDField(null=True)
+    auth = models.UUIDField(null=True)
+    is_auth = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
