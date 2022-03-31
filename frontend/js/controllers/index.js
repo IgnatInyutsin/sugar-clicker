@@ -14,7 +14,7 @@ main.controller('index', function ($scope, $http, $location, $cookies) {
             url: urls.domain + 'user/list/' + $cookies.get("user_id") + "/",
             method: 'patch',
             datatype: 'application/json',
-            data: {my_session_uuid: $cookies.get("session"), plus_balance: $scope.sugarClicks},
+            data: {session_uuid: $cookies.get("session"), balance: $scope.sugarClicks},
             success: function (data) {
                 document.querySelector("footer").insertAdjacentHTML('afterbegin', '<div class="alert alert-success fade show" role="alert" style="position: fixed; left: 0; bottom: 0; width: 100%; display: flex; justify-content: space-between">\n' +
                     '    <strong>Баланс</strong> В баланс успешно добавлено ' + $scope.sugarClicks + ' пакет(а/ов) сахара' +

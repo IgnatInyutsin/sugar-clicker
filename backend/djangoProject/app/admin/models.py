@@ -16,7 +16,6 @@ class AdminsGroup(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     count = models.IntegerField()
     admin = models.ForeignKey(Admin, on_delete=models.CASCADE)
-    __name__ = "AdminsGroup"
 
     def __str__(self):
         return str(self.id)

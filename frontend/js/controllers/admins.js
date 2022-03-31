@@ -5,7 +5,7 @@ main.controller('admins', function ($scope, $http, $location, $cookies) {
     let urls = new BackendConnector();
     //делаем get запроc
     $.ajax({
-        url: urls.domain + 'admins/',
+        url: urls.domain + 'admins/shop/',
         method: 'get',
         datatype: 'application/json',
         success: function (data) {

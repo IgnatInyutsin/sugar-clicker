@@ -45,22 +45,32 @@ main.controller('header', function ($scope, $http, $location, $cookies) {
             },
             error: function (xhr) {
                 console.log(xhr);
-                if (xhr.responseJSON[0].code == "MISSING_IN_DB_EMAIL") {
-                    document.querySelector("footer").insertAdjacentHTML('afterbegin', '<div class="alert alert-danger fade show" role="alert" style="position: fixed; left: 0; bottom: 0; width: 100%; display: flex; justify-content: space-between">\n' +
-                        '    <strong>Ошибка почты</strong> Данный Email не зарегистрирован \n' +
-                        '    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>\n' +
-                        '</div>');
-                } else if (xhr.responseJSON[0].code == "EMAIL_WRONG_FORMAT") {
-                    document.querySelector("footer").insertAdjacentHTML('afterbegin', '<div class="alert alert-danger fade show" role="alert" style="position: fixed; left: 0; bottom: 0; width: 100%; display: flex; justify-content: space-between">\n' +
-                        '    <strong>Ошибка почты</strong> Пожалуйста, введите корректный Email \n' +
-                        '    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>\n' +
-                        '</div>');
-                } else if (xhr.responseJSON[0].code == "WRONG_PASSWORD") {
-                    document.querySelector("footer").insertAdjacentHTML('afterbegin', '<div class="alert alert-danger fade show" role="alert" style="position: fixed; left: 0; bottom: 0; width: 100%; display: flex; justify-content: space-between">\n' +
-                        '    <strong>Ошибка пароля</strong> Неверный пароль \n' +
-                        '    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>\n' +
-                        '</div>');
-                }
+                try {
+                    if (xhr.responseJSON.email.code == "MISSING_IN_DB_EMAIL") {
+                        document.querySelector("footer").insertAdjacentHTML('afterbegin', '<div class="alert alert-danger fade show" role="alert" style="position: fixed; left: 0; bottom: 0; width: 100%; display: flex; justify-content: space-between">\n' +
+                            '    <strong>Ошибка почты</strong> Данный Email не зарегистрирован \n' +
+                            '    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>\n' +
+                            '</div>')
+                    }
+                } catch (e) {}
+
+                try {
+                    if (xhr.responseJSON.email[0] == 'Enter a valid email address.') {
+                        document.querySelector("footer").insertAdjacentHTML('afterbegin', '<div class="alert alert-danger fade show" role="alert" style="position: fixed; left: 0; bottom: 0; width: 100%; display: flex; justify-content: space-between">\n' +
+                            '    <strong>Ошибка почты</strong> Пожалуйста, введите корректный Email \n' +
+                            '    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>\n' +
+                            '</div>');
+                    }
+                } catch (e) {}
+
+                try {
+                    if (xhr.responseJSON[0].code == "WRONG_PASSWORD") {
+                        document.querySelector("footer").insertAdjacentHTML('afterbegin', '<div class="alert alert-danger fade show" role="alert" style="position: fixed; left: 0; bottom: 0; width: 100%; display: flex; justify-content: space-between">\n' +
+                            '    <strong>Ошибка пароля</strong> Неверный пароль \n' +
+                            '    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>\n' +
+                            '</div>');
+                    }
+                } catch (e) {}
             }
         });
     }

@@ -1,6 +1,6 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, mixins
 from rest_framework.response import Response
-from djangoProject.app.admin.group.serializer import AdminsGroupSerializer
+from djangoProject.app.admin.group.serializers import AdminsGroupSerializer, AdminsGroupGetSerializer
 from djangoProject.app.user.models import User
 from djangoProject.app.admin.models import Admin, AdminsGroup
 from rest_framework.serializers import ValidationError
@@ -8,10 +8,20 @@ import time
 from django.core import serializers
 
 # Класс для запросов по AdminsGroup, доступен только POST и GET
-class AdminsGroupViewSet(viewsets.ModelViewSet):
+class AdminsGroupViewSet(mixins.CreateModelMixin,
+                        mixins.RetrieveModelMixin,
+                        mixins.ListModelMixin,
+                        viewsets.GenericViewSet):
     #связываем с сериализатором
     queryset = AdminsGroup.objects.all().order_by('id')
-    serializer_class = AdminsGroupSerializer
+    serializer_class = AdminsGroupGetSerializer
+
+    # для разных методов разные сериализаторы
+    def get_serializer_class(self):
+        if self.action == 'create':
+            return AdminsGroupSerializer
+        else:
+            return AdminsGroupGetSerializer
 
     # метод POST
     def create(self, request):
@@ -54,20 +64,3 @@ class AdminsGroupViewSet(viewsets.ModelViewSet):
 
         # Если сериализатор не прошел валидацию, возвращаем ошибки
         raise ValidationError(serializer.errors)
-
-    def retrieve(self, request, pk=None):
-        return Response(status=405,
-                        data={"code": "INVALID_METHOD", "error_text": "Method is invalid for this path"})
-
-    def update(self, request, pk=None):
-        return Response(status=405,
-                        data={"code": "INVALID_METHOD", "error_text": "Method is invalid for this path"})
-
-    def partial_update(self, request, pk=None):
-        return Response(status=405,
-                        data={"code": "INVALID_METHOD", "error_text": "Method is invalid for this path"})
-
-
-    def destroy(self, request, pk=None):
-        return Response(status=405,
-                        data={"code": "INVALID_METHOD", "error_text": "Method is invalid for this path"})

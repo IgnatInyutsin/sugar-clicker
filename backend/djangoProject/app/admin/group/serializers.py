@@ -6,7 +6,7 @@ from djangoProject.app.validators.admin_id_validation import validate_admin_id
 from rest_framework.serializers import ValidationError
 
 
-# Дополнительные сериализаторы для вложенности
+# Дополнительные сериализаторы для вложенности в post
 class UserBuyAdminSerializer(serializers.HyperlinkedModelSerializer):
     balance = serializers.IntegerField(read_only=True)
     session_uuid =  serializers.CharField(write_only=True)
@@ -25,7 +25,26 @@ class AdminBuyAdminSerializer(serializers.HyperlinkedModelSerializer):
         model = Admin
         fields = ('id', 'cost')
 
-# Сериализатор для admin
+# Дополнительные сериализаторы для вложенности в get
+class UserGetAdminSerializer(serializers.HyperlinkedModelSerializer):
+    balance = serializers.IntegerField(read_only=True)
+    last_passive_income_data = serializers.IntegerField(read_only=True)
+    id = serializers.IntegerField(read_only=True)
+
+    class Meta:
+        model = User
+        fields = ['id', 'name', 'email', 'registration_at', 'sugar_all_time', 'balance', 'last_passive_income_data']
+
+class AdminGetAdminSerializer(serializers.HyperlinkedModelSerializer):
+    cost = serializers.IntegerField(read_only=True)
+    id = serializers.IntegerField()
+
+    class Meta:
+        model = Admin
+        fields = ('id', 'name', 'cost', 'profit')
+
+
+# Сериализатор для post
 class AdminsGroupSerializer(serializers.HyperlinkedModelSerializer):
     # Создаем вложенные списки
     user = UserBuyAdminSerializer()
@@ -34,3 +53,13 @@ class AdminsGroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = AdminsGroup
         fields = ('count', 'user', 'admin')
+
+# Сериализатор для get
+class AdminsGroupGetSerializer(serializers.HyperlinkedModelSerializer):
+    # Создаем вложенные списки
+    user = UserGetAdminSerializer()
+    admin = AdminGetAdminSerializer()
+
+    class Meta:
+        model = AdminsGroup
+        fields = ('id', 'count', 'user', 'admin')

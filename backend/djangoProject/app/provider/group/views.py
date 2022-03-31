@@ -1,17 +1,30 @@
 from rest_framework import viewsets
+from rest_framework import mixins
 from rest_framework.response import Response
-from djangoProject.app.provider.group.serializer import ProvidersGroupSerializer
+from djangoProject.app.provider.group.serializers import ProvidersGroupSerializer, ProvidersGroupGetSerializer
 from djangoProject.app.user.models import User
 from djangoProject.app.provider.models import Provider, ProvidersGroup
 from rest_framework.serializers import ValidationError
 import time
 from django.core import serializers
+from rest_framework.renderers import JSONRenderer
 
-# Класс для запросов по AdminsGroup, доступен только POST и GET
-class ProvidersGroupViewSet(viewsets.ModelViewSet):
+# Класс для запросов по ProvidersGroup, доступен только POST и GET
+class ProvidersGroupViewSet(mixins.CreateModelMixin,
+                            mixins.RetrieveModelMixin,
+                            mixins.ListModelMixin,
+                            viewsets.GenericViewSet):
+
     #связываем с сериализатором
     queryset = ProvidersGroup.objects.all().order_by('id')
-    serializer_class = ProvidersGroupSerializer
+    serializer_class = ProvidersGroupGetSerializer
+
+    # для разных методов разные сериализаторы
+    def get_serializer_class(self):
+        if self.action == 'create':
+            return ProvidersGroupSerializer
+        else:
+            return ProvidersGroupGetSerializer
 
     # метод POST
     def create(self, request):
@@ -40,7 +53,7 @@ class ProvidersGroupViewSet(viewsets.ModelViewSet):
                 # иначе - ошибка
                 raise ValidationError([{'code': 'SMALL_BALANCE', 'text': 'You do not have money'}])
 
-            # Проверка на наличие группы. Если уже есть - обновляем, иначе - создаем.
+            # Проверка на наличие группы. Если уже есть - обновляем
             if not ProvidersGroup.objects.all().filter(user=user).filter(provider=provider).exists():
                 providersGroup = ProvidersGroup(user=user, provider=provider, count=request.data['count'])
                 providersGroup.save()
@@ -54,20 +67,3 @@ class ProvidersGroupViewSet(viewsets.ModelViewSet):
 
         # Если сериализатор не прошел валидацию, возвращаем ошибки
         raise ValidationError(serializer.errors)
-
-    def retrieve(self, request, pk=None):
-        return Response(status=405,
-                        data={"code": "INVALID_METHOD", "error_text": "Method is invalid for this path"})
-
-    def update(self, request, pk=None):
-        return Response(status=405,
-                        data={"code": "INVALID_METHOD", "error_text": "Method is invalid for this path"})
-
-    def partial_update(self, request, pk=None):
-        return Response(status=405,
-                        data={"code": "INVALID_METHOD", "error_text": "Method is invalid for this path"})
-
-
-    def destroy(self, request, pk=None):
-        return Response(status=405,
-                        data={"code": "INVALID_METHOD", "error_text": "Method is invalid for this path"})

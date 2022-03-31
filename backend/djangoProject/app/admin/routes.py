@@ -5,7 +5,7 @@ from djangoProject.app.admin.group.views import AdminsGroupViewSet
 
 #устанавливаем пути
 router = routers.DefaultRouter()
-router.register('', AdminViewSet)
+router.register('shop', AdminViewSet)
 router.register('group', AdminsGroupViewSet)
 
 # Wire up our API using automatic URL routing.
