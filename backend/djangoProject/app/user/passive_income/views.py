@@ -89,7 +89,7 @@ class PassiveIncomeViewSet(mixins.UpdateModelMixin,
                                   "adding": income})
 
     # Для вызова извне
-    def __call__(pk):
+    def __call__(self, pk):
         # получаем из бд данные об этом пользователе
         user = User.objects.get(id=pk)
         user_for_update = User.objects.all().filter(id=pk)

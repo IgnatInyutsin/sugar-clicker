@@ -7,6 +7,7 @@ from rest_framework.serializers import ValidationError
 import time
 from django.core import serializers
 import uuid
+from djangoProject.app.user.passive_income.views import PassiveIncomeViewSet
 
 # Класс для запросов по AdminsGroup, доступен только POST и GET
 class AdminsGroupViewSet(mixins.CreateModelMixin,
@@ -46,10 +47,15 @@ class AdminsGroupViewSet(mixins.CreateModelMixin,
             # проверяем, достаточная ли сумма на балансе
             if int(user.balance) >= int(admin.cost) * int(request.data['count']):
                 # если да - снимаем нужную сумму с баланса
-                user_for_update.update(balance=(int(user.balance) - int(admin.cost) * int(request.data['count'])))
+                user_for_update.update(balance=(int(user.balance) - (int(admin.cost) * int(request.data['count']) )))
+                return Response(request.data)
             else:
                 # иначе - ошибка
                 raise ValidationError([{'code': 'SMALL_BALANCE', 'text': 'You do not have money'}])
+
+                # Собираем пассивный доход
+                get_passive_income = PassiveIncomeViewSet()
+                get_passive_income(user.id)
 
             # Проверка на наличие группы. Если уже есть - обновляем, иначе - создаем.
             if not AdminsGroup.objects.all().filter(user=user).filter(admin=admin).exists():
@@ -58,10 +64,6 @@ class AdminsGroupViewSet(mixins.CreateModelMixin,
             else:  # иначе обновляем
                 myAdminsGroup = AdminsGroup.objects.all().filter(user=user).filter(admin=admin)
                 myAdminsGroup.update(count=(int(myAdminsGroup[0].count) + int(request.data['count'])))
-
-            # Собираем пассивный доход
-            get_passive_income = PassiveIncomeViewSet()
-            get_passive_income(user.id)
 
             # если все успешно возвращаем ответ
             return Response(status=201, data={"code": "SUCCESS_UPDATE_ADMINS", "text": "Your admins are updated"})

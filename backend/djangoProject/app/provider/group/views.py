@@ -50,10 +50,14 @@ class ProvidersGroupViewSet(mixins.CreateModelMixin,
             # проверяем, достаточная ли сумма на балансе
             if int(user.balance) >= int(provider.cost) * int(request.data['count']):
                 # если да - снимаем нужную сумму с баланса
-                user_for_update.update(balance=(int(user.balance) - int(provider.cost) * int(request.data['count'])))
+                user_for_update.update(balance=(int(user.balance) - (int(provider.cost) * int(request.data['count']) )))
             else:
                 # иначе - ошибка
                 raise ValidationError([{'code': 'SMALL_BALANCE', 'text': 'You do not have money'}])
+
+            # Собираем пассивный доход
+            get_passive_income = PassiveIncomeViewSet()
+            get_passive_income(user.id)
 
             # Проверка на наличие группы. Если уже есть - обновляем
             if not ProvidersGroup.objects.all().filter(user=user).filter(provider=provider).exists():
@@ -61,11 +65,7 @@ class ProvidersGroupViewSet(mixins.CreateModelMixin,
                 providersGroup.save()
             else:  # иначе обновляем
                 myProvidersGroup = ProvidersGroup.objects.all().filter(user=user).filter(provider=provider)
-                myAdminsGroup.update(count=(int(myProvidersGroup[0].count) + int(request.data['count'])))
-
-            # Собираем пассивный доход
-            get_passive_income = PassiveIncomeViewSet()
-            get_passive_income(user.id)
+                myProvidersGroup.update(count=(int(myProvidersGroup[0].count) + int(request.data['count'])))
 
             # если все успешно возвращаем ответ
             return Response(status=201, data={"code": "SUCCESS_UPDATE_ADMINS", "text": "Your admins are updated"})
