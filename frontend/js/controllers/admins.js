@@ -3,6 +3,11 @@ main.controller('admins', function ($scope, $http, $location, $cookies) {
     $scope.$parent.pageName = 'admins';
     //подключаем BackendConnector
     let urls = new BackendConnector();
+    // проверяем на действительность сессии
+    if ($scope.login) {
+        let checker = new Api();
+        checker.checkSession($cookies.get('session'), $cookies.get('user_id'))
+    }
 
     //делаем get запроcы
     $.ajax({ // достаем наш баланс

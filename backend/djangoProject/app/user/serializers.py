@@ -3,7 +3,7 @@ from djangoProject.app.user.models import User
 from djangoProject.app.admin.group.serializers import AdminsGroupGetSerializer
 from djangoProject.app.provider.group.serializers import ProvidersGroupGetSerializer
 
-# Сериализатор для пользователей
+# Сериализатор для GET
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     session_uuid = serializers.CharField(write_only=True)
     pass_cache = serializers.CharField(write_only=True)
@@ -22,6 +22,12 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
                   'pass_cache',
                   'admins',
                   'providers']
+
+# Сериализатор для POST
+class UserRegistrationSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = User
+        fields = ['name', 'email', 'session_uuid', 'pass_cache']
 
 # Сериализатор для PUT и PATCH
 class UserBalanceSerializer(serializers.HyperlinkedModelSerializer):

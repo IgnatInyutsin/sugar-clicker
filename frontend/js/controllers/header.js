@@ -3,7 +3,21 @@ main.controller('header', function ($scope, $http, $location, $cookies) {
 
     //добавляем данные о user_id пользователя
     if ($scope.login) {
+        let urls = new BackendConnector();
         $scope.userID = $cookies.get("user_id")
+        $.ajax({
+            url: urls.domain + 'user/list/' + $cookies.get('user_id') + "/",
+            method: 'get',
+            datatype: 'application/json',
+            async: false,
+            success: function (data) {
+                $scope.userName = data.name
+                $scope.balance = data.balance
+            }
+        })
+        $scope.messageForUser = "Баланс " + $scope.userName + ": " + $scope.balance
+    } else {
+        $scope.messageForUser = "Режим гостя, войдите в аккаунт"
     }
 
     // проверка заполненности полей входа

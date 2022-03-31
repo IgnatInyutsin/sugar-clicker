@@ -58,7 +58,10 @@ class AdminsGroupViewSet(mixins.CreateModelMixin,
             else:  # иначе обновляем
                 myAdminsGroup = AdminsGroup.objects.all().filter(user=user).filter(admin=admin)
                 myAdminsGroup.update(count=(int(myAdminsGroup[0].count) + int(request.data['count'])))
-            # Здесь будет автоматический сбор пассивного дохода
+
+            # Собираем пассивный доход
+            get_passive_income = PassiveIncomeViewSet()
+            get_passive_income(user.id)
 
             # если все успешно возвращаем ответ
             return Response(status=201, data={"code": "SUCCESS_UPDATE_ADMINS", "text": "Your admins are updated"})

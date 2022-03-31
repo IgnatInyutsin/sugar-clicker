@@ -8,6 +8,10 @@
     .ascending-descending {
         margin-top: 20px;
     }
+    .nav-link.my-link {
+        white-space: normal;
+        margin-left: 0;
+    }
 }
 @media screen and (max-width: 1083px) {
     .ascending-descending {

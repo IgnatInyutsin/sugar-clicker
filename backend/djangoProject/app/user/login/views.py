@@ -13,10 +13,6 @@ class LoginViewSet(mixins.CreateModelMixin,
     queryset = User.objects.all().order_by('id')
     serializer_class = LoginSerializer
 
-    def partial_update(self, request, pk=None):
-        return Response(status=405,
-                        data={"code": "INVALID_METHOD", "error_text": "Method is invalid for this path"})
-
     def create(self, request):
         # Получаем наш сериализатор
         serializer = self.get_serializer(data=request.data)

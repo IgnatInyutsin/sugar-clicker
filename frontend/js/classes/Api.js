@@ -3,6 +3,35 @@ class Api {
         return this
     }
 
+    setCookie(name, value, options) {
+        options = options || {};
+
+        var expires = options.expires;
+
+        if (typeof expires == "number" && expires) {
+            var d = new Date();
+            d.setTime(d.getTime() + expires * 1000);
+            expires = options.expires = d;
+        }
+        if (expires && expires.toUTCString) {
+            options.expires = expires.toUTCString();
+        }
+
+        value = encodeURIComponent(value);
+
+        var updatedCookie = name + "=" + value;
+
+        for (var propName in options) {
+            updatedCookie += "; " + propName;
+            var propValue = options[propName];
+            if (propValue !== true) {
+                updatedCookie += "=" + propValue;
+            }
+        }
+
+        document.cookie = updatedCookie;
+    }
+
     SHA256(s){
         var chrsz = 8;
         var hexcase = 0;
@@ -138,10 +167,41 @@ class Api {
         var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
         return time;
     }
+
     byFieldDown(field) {
         return (a, b) => a[field] > b[field] ? 1 : -1;
     }
+
     byFieldUp(field) {
         return (a, b) => a[field] < b[field] ? 1 : -1;
+    }
+
+    checkSession(session, id) {
+        let urls = new BackendConnector();
+        $.ajax({
+            url: urls.domain + 'user/check/' + id + "/",
+            method: 'patch',
+            datatype: 'application/json',
+            data: {session_uuid: session},
+            error: function (xhr) {
+                console.log(xhr)
+                let api = new Api();
+                //удаляем cookie
+                api.setCookie("session", "", {
+                    expires: -1
+                });
+                api.setCookie("user_id", "", {
+                    expires: -1
+                });
+                //перезагружаем страницу
+                location.hash = "!/faq/"
+                document.querySelector("footer").insertAdjacentHTML('afterbegin', '<div class="alert alert-danger fade show" role="alert" style="position: fixed; left: 0; bottom: 0; width: 100%; display: flex; justify-content: space-between">\n' +
+                    '    <strong>Ошибка сессии</strong> ваша сессия не действительна - был произведен вход со стороннего устройства' +
+                    '\n' +
+                    '    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>\n' +
+                    '</div>');
+                setTimeout(function () {location.reload();}, 5000);
+            }
+        });
     }
 }

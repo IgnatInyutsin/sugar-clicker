@@ -9,6 +9,7 @@ import time
 from django.core import serializers
 from rest_framework.renderers import JSONRenderer
 import uuid
+from djangoProject.app.user.passive_income.views import PassiveIncomeViewSet
 
 # Класс для запросов по ProvidersGroup, доступен только POST и GET
 class ProvidersGroupViewSet(mixins.CreateModelMixin,
@@ -61,7 +62,10 @@ class ProvidersGroupViewSet(mixins.CreateModelMixin,
             else:  # иначе обновляем
                 myProvidersGroup = ProvidersGroup.objects.all().filter(user=user).filter(provider=provider)
                 myAdminsGroup.update(count=(int(myProvidersGroup[0].count) + int(request.data['count'])))
-            # Здесь будет автоматический сбор пассивного дохода
+
+            # Собираем пассивный доход
+            get_passive_income = PassiveIncomeViewSet()
+            get_passive_income(user.id)
 
             # если все успешно возвращаем ответ
             return Response(status=201, data={"code": "SUCCESS_UPDATE_ADMINS", "text": "Your admins are updated"})

@@ -1,6 +1,6 @@
 from rest_framework import viewsets, mixins
 from rest_framework.response import Response
-from djangoProject.app.user.serializers import UserSerializer, UserBalanceSerializer
+from djangoProject.app.user.serializers import UserSerializer, UserBalanceSerializer, UserRegistrationSerializer
 from djangoProject.app.user.models import User
 from rest_framework.serializers import ValidationError
 from djangoProject.app.validators.uuid_validation import validate_uuid
@@ -19,6 +19,8 @@ class UserViewSet(mixins.CreateModelMixin,
     def get_serializer_class(self):
         if self.action == "update" or self.action == "partial_update":
             return UserBalanceSerializer
+        elif self.action == "create":
+            return UserRegistrationSerializer
         else:
             return UserSerializer
 

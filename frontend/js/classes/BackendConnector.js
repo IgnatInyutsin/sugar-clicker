@@ -1,5 +1,5 @@
 class BackendConnector {
     constructor() {
-        this.domain = "http://localhost:82/api/"
+        this.domain = "http://192.168.1.40:82/api/"
     }
 }

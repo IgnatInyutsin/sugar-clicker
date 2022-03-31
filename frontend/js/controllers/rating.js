@@ -3,6 +3,7 @@ main.controller('rating', function ($scope, $http, $location, $cookies) {
     $scope.$parent.pageName = 'rating';
     //получаем ссылочку
     let urls = new BackendConnector();
+
     $.ajax({
         url: urls.domain + 'user/list/',
         method: 'get',
@@ -34,7 +35,7 @@ main.controller('rating', function ($scope, $http, $location, $cookies) {
             for (i=0; i < $scope.userList.length; i++) {
                 $scope.userList[i].number = i+1
             }
-            
+
             $scope.$apply();
 
             console.log($scope.userList);
