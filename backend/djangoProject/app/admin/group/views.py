@@ -6,6 +6,7 @@ from djangoProject.app.admin.models import Admin, AdminsGroup
 from rest_framework.serializers import ValidationError
 import time
 from django.core import serializers
+import uuid
 
 # Класс для запросов по AdminsGroup, доступен только POST и GET
 class AdminsGroupViewSet(mixins.CreateModelMixin,
@@ -31,9 +32,9 @@ class AdminsGroupViewSet(mixins.CreateModelMixin,
         if serializer.is_valid(raise_exception=True):
             # проверяем, актуальны ли admin_id и session_uuid (это должна сделать валидация в сериализаторе,
             # но она не работает, так что пусть сделает здесь)
-            if User.objects.all().filter(session_uuid=request.POST['user.session_uuid']).exists():
+            if not User.objects.all().filter(session_uuid=uuid.UUID(request.POST['user.session_uuid'])).exists():
                 raise ValidationError([{"code": "SESSION_UUID_UNDEFINED", "text": "session_uuid in undefinded"}])
-            if Admin.objects.all().filter(id=request.POST['admin.id']).exists():
+            if not Admin.objects.all().filter(id=request.POST['admin.id']).exists():
                 raise ValidationError([{"code": "ADMIN_ID_UNDEFINED", "text": "admin_id in undefinded"}])
 
             # по session_id соединяем с User
@@ -52,7 +53,7 @@ class AdminsGroupViewSet(mixins.CreateModelMixin,
 
             # Проверка на наличие группы. Если уже есть - обновляем, иначе - создаем.
             if not AdminsGroup.objects.all().filter(user=user).filter(admin=admin).exists():
-                adminGroup = AdminsGroup(user=user, admin=admin, count=request.data['count'])
+                adminGroup = AdminsGroup(user=user, admin=admin, count=int(request.data['count']))
                 adminGroup.save()
             else:  # иначе обновляем
                 myAdminsGroup = AdminsGroup.objects.all().filter(user=user).filter(admin=admin)

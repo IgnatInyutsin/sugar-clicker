@@ -1,4 +1,11 @@
 <div class="profile-parent center margins" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center">
+    <div class="card profile shop-size">
+        <div class="card-header">Статистика</div>
+        <div class="card-body">
+            <h2>Баланс</h2>
+            <p>{{balance}} пакет(а/ов)</p>
+        </div>
+    </div>
     <div ng-repeat="admin in adminsList">
         <div class="card profile shop-size">
             <div class="card-header">{{admin.name}}</div>
@@ -6,8 +13,8 @@
                 <p><b>Стоимость:</b> {{admin.cost}} пакет(a/ов)</p>
                 <p><b>Прибавка к проценту администрации:</b> {{admin.profit}}%</p>
                 <form class="d-flex" style="justify-content: end;">
-                    <input class="form-control me-4" type="number" placeholder="К-во шт" aria-label="">
-                    <button class="btn btn-outline-success" type="submit" id="adminButton{{admin.id}}">Купить</button>
+                    <input class="form-control me-4" type="number" placeholder="К-во шт" aria-label="" id="cost{{admin.id}}">
+                    <button class="btn btn-outline-success" type="submit" ng-click="buyAdmin(admin.id)">Купить</button>
                 </form>
             </div>
         </div>

@@ -8,6 +8,7 @@ from rest_framework.serializers import ValidationError
 import time
 from django.core import serializers
 from rest_framework.renderers import JSONRenderer
+import uuid
 
 # Класс для запросов по ProvidersGroup, доступен только POST и GET
 class ProvidersGroupViewSet(mixins.CreateModelMixin,
@@ -34,9 +35,9 @@ class ProvidersGroupViewSet(mixins.CreateModelMixin,
         if serializer.is_valid(raise_exception=True):
             # проверяем, актуальны ли admin_id и session_uuid (это должна сделать валидация в сериализаторе,
             # но она не работает, так что пусть сделает здесь)
-            if User.objects.all().filter(session_uuid=request.POST['user.session_uuid']).exists():
+            if not User.objects.all().filter(session_uuid=uuid.UUID(request.POST['user.session_uuid'])).exists():
                 raise ValidationError([{"code": "SESSION_UUID_UNDEFINED", "text": "session_uuid in undefinded"}])
-            if Provider.objects.all().filter(id=request.POST['provider.id']).exists():
+            if not Provider.objects.all().filter(id=request.POST['provider.id']).exists():
                 raise ValidationError([{"code": "PROVIDER_ID_UNDEFINED", "text": "provider_id in undefinded"}])
 
             # по session_id соединяем с User

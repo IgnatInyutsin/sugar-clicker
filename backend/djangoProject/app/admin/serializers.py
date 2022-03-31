@@ -5,4 +5,4 @@ from djangoProject.app.admin.models import Admin
 class AdminShopSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Admin
-        fields = ('name', 'cost', 'profit')
+        fields = ('id', 'name', 'cost', 'profit')

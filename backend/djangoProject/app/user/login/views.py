@@ -21,7 +21,11 @@ class LoginViewSet(mixins.CreateModelMixin,
         # Получаем наш сериализатор
         serializer = self.get_serializer(data=request.data)
         # Проверяем, все ли поля прошли валидацию
-        if serializer.is_valid(raise_exception=True) or (not serializer.is_valid(raise_exception=True) and serializer.errors.get("email", False) == 'user with this email already exists.'):
+        if serializer.is_valid(raise_exception=True) or \
+                (not serializer.is_valid(raise_exception=True)  \
+                 and serializer.errors.get("email", [0]) == 'user with this email already exists.' \
+                 and not "balance", "session_uuid" in serializer.errors):
+
             # проверяем ее наличие в базе данных
             if not User.objects.all().filter(email=request.data["email"]).exists():
                 raise ValidationError([{"code": "MISSING_IN_DB_EMAIL", "text": "Email absent in database"}])
