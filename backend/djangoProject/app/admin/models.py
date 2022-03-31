@@ -13,7 +13,7 @@ class Admin(models.Model):
         return self.name
 
 class AdminsGroup(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="admins")
     count = models.IntegerField()
     admin = models.ForeignKey(Admin, on_delete=models.CASCADE)
 

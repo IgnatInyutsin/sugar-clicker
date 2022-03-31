@@ -4,38 +4,38 @@
   </div>
   <div class="card-body p-md-5">
     <div class="btn-group desktop" role="group" aria-label="Basic radio toggle button group">
-      <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off">
+      <input type="radio" class="btn-check sugar_all_time" name="radio" id="btnradio1" autocomplete="off" checked="checked" ng-click="changeSorting('sugar_all_time')">
       <label class="btn btn-outline-primary" for="btnradio1">По сахару за все время</label>
 
-      <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+      <input type="radio" class="btn-check balance" name="radio" id="btnradio2" autocomplete="off" ng-click="changeSorting('balance')">
       <label class="btn btn-outline-primary" for="btnradio2">По сахару на балансе</label>
 
-      <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+      <input type="radio" class="btn-check passive_income" name="radio" id="btnradio3" autocomplete="off" ng-click="changeSorting('passive_income')">
       <label class="btn btn-outline-primary" for="btnradio3">По пассивному доходу</label>
     </div>
     <div class="btn-group desktop ascending-descending" role="group" aria-label="Basic radio toggle button group">
-      <input type="radio" class="btn-check" name="btnradio-small" id="btnradio-small1" autocomplete="off">
+      <input type="radio" class="btn-check" name="radio2" id="btnradio-small1" autocomplete="off" checked="checked" ng-click="changeSortingUpToDown('down')">
       <label class="btn btn-outline-primary" for="btnradio-small1">Убывание</label>
 
-      <input type="radio" class="btn-check" name="btnradio-small" id="btnradio-small2" autocomplete="off">
+      <input type="radio" class="btn-check" name="radio2" id="btnradio-small2" autocomplete="off" ng-click="changeSortingUpToDown('up')">
       <label class="btn btn-outline-primary" for="btnradio-small2">Возрастание</label>
     </div>
 
     <div class="btn-group-vertical mobile" role="group" aria-label="Basic radio toggle button group">
-      <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off">
+      <input type="radio" class="btn-check sugar_all_time" name="radio" id="btnradio4" autocomplete="off" ng-click="changeSorting('sugar_all_time')">
       <label class="btn btn-outline-primary" for="btnradio4">По сахару за все время</label>
 
-      <input type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off">
+      <input type="radio" class="btn-check balance" name="radio" id="btnradio5" autocomplete="off" ng-click="changeSorting('balance')">
       <label class="btn btn-outline-primary" for="btnradio5">По сахару на балансе</label>
 
-      <input type="radio" class="btn-check" name="btnradio" id="btnradio6" autocomplete="off">
+      <input type="radio" class="btn-check passive_income" name="radio" id="btnradio6" autocomplete="off" ng-click="changeSorting('passive_income')">
       <label class="btn btn-outline-primary" for="btnradio6">По пассивному доходу</label>
     </div>
     <div class="btn-group-vertical mobile ascending-descending" role="group" aria-label="Basic radio toggle button group">
-      <input type="radio" class="btn-check" name="btnradio-small" id="btnradio-small3" autocomplete="off">
+      <input type="radio" class="btn-check" name="radio2" id="btnradio-small3" autocomplete="off" ng-click=changeSortingUpToDown('down')">
       <label class="btn btn-outline-primary" for="btnradio-small3">Убывание</label>
 
-      <input type="radio" class="btn-check" name="btnradio-small" id="btnradio-small4" autocomplete="off">
+      <input type="radio" class="btn-check" name="radio2" id="btnradio-small4" autocomplete="off" ng-click="changeSortingUpToDown('up')">
       <label class="btn btn-outline-primary" for="btnradio-small4">Возрастание</label>
     </div>
 
@@ -50,27 +50,20 @@
     <table class="table">
       <thead>
       <tr>
-        <th scope="col">#</th>
+        <th scope="row">#</th>
         <th scope="col">Имя</th>
         <th scope="col">Сахар за все время</th>
         <th scope="col">Сахар на балансе</th>
         <th scope="col">Пассивный доход</th>
       </tr>
       </thead>
-      <tbody>
+      <tbody ng-repeat="user in userList">
       <tr>
-        <th scope="row">1</th>
-        <td>бобер</td>
-        <td>10000 пакет(а/ов)</td>
-        <td>500 пакет(а/ов)</td>
-        <td>0.93 пакет(а/oв)/сек</td>
-      </tr>
-      <tr>
-        <th scope="row">1</th>
-        <td>бобриха</td>
-        <td>10000 пакет(а/ов)</td>
-        <td>500 пакет(а/ов)</td>
-        <td>0.93 пакет(а/oв)/сек</td>
+        <td>{{user.number}}</td>
+        <td>{{user.name}}</td>
+        <td>{{user.sugar_all_time}} пакет(а/ов)</td>
+        <td>{{user.balance}} пакет(а/ов)</td>
+        <td>{{user.passive_income}} пакет(а/ов)/сек</td>
       </tr>
       </tbody>
     </table>

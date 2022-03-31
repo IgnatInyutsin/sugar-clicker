@@ -19,7 +19,7 @@
                     <a class="nav-link" href="#!/rating/">Рейтинг</a>
                 </li>
                 <li class="nav-item" ng-if="login">
-                    <a class="nav-link" href="#!/my_profile/">Профиль</a>
+                    <a class="nav-link" ng-href="#!/profile/{{userID}}">Профиль</a>
                 </li>
                 <li class="nav-item" ng-if="!login">
                     <a class="nav-link" href="#!/registration/">Регистрация</a>

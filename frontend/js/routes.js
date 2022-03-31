@@ -10,7 +10,7 @@ main.config(function ($routeProvider) {
         controller: "registration",
         templateUrl: "views/controllers/registration.html"
     });
-    $routeProvider.when("/my_profile/", {
+    $routeProvider.when("/profile/:user", {
         controller: "profile",
         templateUrl: "views/controllers/profile.html"
     });

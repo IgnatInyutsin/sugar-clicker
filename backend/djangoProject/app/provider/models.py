@@ -13,7 +13,7 @@ class Provider(models.Model):
         return self.name
 
 class ProvidersGroup(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE,)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="providers")
     count = models.IntegerField()
     provider = models.ForeignKey(Provider, on_delete=models.CASCADE,)
 

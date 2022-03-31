@@ -1,6 +1,11 @@
 main.controller('header', function ($scope, $http, $location, $cookies) {
     //контроллер страницы header
 
+    //добавляем данные о user_id пользователя
+    if ($scope.login) {
+        $scope.userID = $cookies.get("user_id")
+    }
+
     // проверка заполненности полей входа
     if (!$scope.login) {
         setInterval(function () {

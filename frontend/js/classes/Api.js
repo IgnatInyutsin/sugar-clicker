@@ -125,4 +125,23 @@ class Api {
             (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
         );
     }
+
+    timeConverter(UNIX_timestamp){
+        var a = new Date(UNIX_timestamp * 1000);
+        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        var year = a.getFullYear();
+        var month = months[a.getMonth()];
+        var date = a.getDate();
+        var hour = a.getHours();
+        var min = a.getMinutes();
+        var sec = a.getSeconds();
+        var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+        return time;
+    }
+    byFieldDown(field) {
+        return (a, b) => a[field] > b[field] ? 1 : -1;
+    }
+    byFieldUp(field) {
+        return (a, b) => a[field] < b[field] ? 1 : -1;
+    }
 }

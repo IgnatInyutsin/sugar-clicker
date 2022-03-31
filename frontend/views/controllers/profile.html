@@ -5,7 +5,7 @@
         </div>
         <div class="card-body">
             <h5 class="card-title">Никнейм</h5>
-            <p class="card-text">бобер</p>
+            <p class="card-text">{{aboutUser.name}}</p>
         </div>
     </div>
     <div class="card profile">
@@ -14,7 +14,7 @@
         </div>
         <div class="card-body">
             <h5 class="card-title">Дата регистрации</h5>
-            <p class="card-text">28-02-2077</p>
+            <p class="card-text">{{aboutUser.registration_at}}</p>
         </div>
     </div>
     <div class="card profile">
@@ -23,7 +23,7 @@
         </div>
         <div class="card-body">
             <h5 class="card-title">Сахара собрано за все время</h5>
-            <p class="card-text">9999999 пакет(ов/а)</p>
+            <p class="card-text">{{aboutUser.sugar_all_time}} пакет(ов/а)</p>
         </div>
     </div>
     <div class="card profile">
@@ -32,7 +32,7 @@
         </div>
         <div class="card-body">
             <h5 class="card-title">Сахара на балансе</h5>
-            <p class="card-text">3842 пакет(ов/а)</p>
+            <p class="card-text">{{aboutUser.balance}} пакет(ов/а)</p>
         </div>
     </div>
     <div class="card profile">
@@ -41,7 +41,7 @@
         </div>
         <div class="card-body">
             <h5 class="card-title">Пассивный доход пакетов/сек</h5>
-            <p class="card-text">2.23 пакет(а/ов)/сек</p>
+            <p class="card-text">{{passiveIncome * adminsProfit / 100}} пакет(а/ов)</p>
         </div>
     </div>
     <div class="card profile">
@@ -50,7 +50,7 @@
         </div>
         <div class="card-body">
             <h5 class="card-title">Работа Администрации</h5>
-            <p class="card-text">97%</p>
+            <p class="card-text">{{adminsProfit}}%</p>
         </div>
     </div>
     <div class="card profile" style="max-width: 600px;">
@@ -62,27 +62,18 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Имя</th>
                     <th scope="col">Количество</th>
                     <th scope="col">Суммарный доход/сек</th>
                     <th scope="col">Доход х1/сек</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody ng-repeat="provider in aboutUser.providers">
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Бабушка-перекуп</td>
-                    <td>4</td>
-                    <td>4</td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Мексиканский сахаро-кортель</td>
-                    <td>1</td>
-                    <td>27</td>
-                    <td>27</td>
+                    <td>{{provider.provider.name}}</td>
+                    <td>{{provider.count}}</td>
+                    <td>{{provider.provider.income * provider.count}}</td>
+                    <td>{{provider.provider.income}}</td>
                 </tr>
                 </tbody>
             </table>
@@ -97,27 +88,18 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Имя</th>
                     <th scope="col">Количество</th>
                     <th scope="col">Сохраняет доход</th>
                     <th scope="col">Сохраняет доход х1</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody ng-repeat="admin in aboutUser.admins">
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Мамкин бизнесмен</td>
-                    <td>100</td>
-                    <td>70%</td>
-                    <td>0.7%</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Работник за еду</td>
-                    <td>1</td>
-                    <td>7%</td>
-                    <td>7%</td>
+                    <td>{{admin.admin.name}}</td>
+                    <td>{{admin.count}}</td>
+                    <td>{{admin.count * admin.admin.profit}}</td>
+                    <td>{{admin.admin.profit}}</td>
                 </tr>
                 </tbody>
             </table>
