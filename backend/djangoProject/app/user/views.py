@@ -16,7 +16,7 @@ class UserViewSet(mixins.CreateModelMixin,
                     mixins.UpdateModelMixin,
                     viewsets.GenericViewSet):
     # обработка запросов про всех пользователей
-    queryset = User.objects.all().order_by('id')
+    queryset = User.objects.all().filter(is_auth=True).order_by('id')
     serializer_class = UserSerializer
 
     def get_serializer_class(self):
