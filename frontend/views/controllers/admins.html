@@ -13,7 +13,7 @@
                 <p><b>Стоимость:</b> {{admin.cost}} пакет(a/ов)</p>
                 <p><b>Прибавка к проценту администрации:</b> {{admin.profit}}%</p>
                 <form class="d-flex" style="justify-content: end;">
-                    <input class="form-control me-4" type="number" placeholder="К-во шт" aria-label="" id="cost{{admin.id}}">
+                    <input class="form-control me-4" type="number" min="0" step="1" placeholder="К-во шт" aria-label="" id="cost{{admin.id}}">
                     <button class="btn btn-outline-success" type="submit" ng-click="buyAdmin(admin.id)">Купить</button>
                 </form>
             </div>

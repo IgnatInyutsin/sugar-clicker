@@ -20,7 +20,7 @@
                 <p><b>Стоимость:</b> {{provider.cost}} пакет(а/ов)</p>
                 <p><b>Доход/сек:</b> {{provider.income}} пакет(a/ов)</p>
                 <form class="d-flex" style="justify-content: end;">
-                    <input class="form-control me-4" type="number" placeholder="К-во шт" aria-label="" id="cost{{provider.id}}">
+                    <input class="form-control me-4" type="number" min="0" step="1" placeholder="К-во шт" aria-label="" id="cost{{provider.id}}">
                     <button class="btn btn-outline-success" type="submit" ng-click="buyProvider(provider.id)">Купить</button>
                 </form>
             </div>
