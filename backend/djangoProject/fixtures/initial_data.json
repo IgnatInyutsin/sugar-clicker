@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
       "name": "Я у мамы сис админ",
-      "cost": 100,
+      "cost": 200,
       "profit": 1
     }
   },
@@ -13,7 +13,7 @@
     "pk": 2,
     "fields": {
       "name": "Таджик",
-      "cost": 180,
+      "cost": 360,
       "profit": 2
     }
   },
@@ -22,7 +22,7 @@
     "pk": 3,
     "fields": {
       "name": "Стажер",
-      "cost": 340,
+      "cost": 680,
       "profit": 4
     }
   },
@@ -31,7 +31,7 @@
     "pk": 4,
     "fields": {
       "name": "Работник за еду",
-      "cost": 680,
+      "cost": 1360,
       "profit": 8
     }
   },
@@ -40,7 +40,7 @@
     "pk": 5,
     "fields": {
       "name": "Подрабатывает между парами",
-      "cost": 1360,
+      "cost": 2720,
       "profit": 16
     }
   },
@@ -48,45 +48,9 @@
     "model": "djangoProject.admin",
     "pk": 6,
     "fields": {
-      "name": "Ничего необычного",
-      "cost": 2580,
+      "name": "Самостоятельно читал документацию",
+      "cost": 5160,
       "profit": 32
-    }
-  },
-  {
-    "model": "djangoProject.admin",
-    "pk": 7,
-    "fields": {
-      "name": "Самостоятельно читал документацию",
-      "cost": 5140,
-      "profit": 64
-    }
-  },
-  {
-    "model": "djangoProject.admin",
-    "pk": 8,
-    "fields": {
-      "name": "Самостоятельно читал документацию",
-      "cost": 5140,
-      "profit": 64
-    }
-  },
-  {
-    "model": "djangoProject.admin",
-    "pk": 9,
-    "fields": {
-      "name": "BongoCat",
-      "cost": 10240,
-      "profit": 128
-    }
-  },
-  {
-    "model": "djangoProject.admin",
-    "pk": 10,
-    "fields": {
-      "name": "Doggy",
-      "cost": 20440,
-      "profit": 256
     }
   },
   {
@@ -195,6 +159,33 @@
       "name": "Big Shlepa",
       "cost": 368640,
       "income": 2048
+    }
+  },
+  {
+    "model": "djangoProject.provider",
+    "pk": 13,
+    "fields": {
+      "name": "Big Shlepa",
+      "cost": 368640,
+      "income": 2048
+    }
+  },
+  {
+    "model": "djangoProject.provider",
+    "pk": 14,
+    "fields": {
+      "name": "Понасенков",
+      "cost": 1474560,
+      "income": 4096
+    }
+  },
+  {
+    "model": "djangoProject.provider",
+    "pk": 15,
+    "fields": {
+      "name": "Продавец говна",
+      "cost": 5898240,
+      "income": 8192
     }
   }
 ]

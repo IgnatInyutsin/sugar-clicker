@@ -33,6 +33,10 @@ class PassiveIncomeViewSet(mixins.UpdateModelMixin,
         for i in range(len(admins)):
             admin_profit += admins[i].admin.profit * admins[i].count
 
+        # максимально - 100%
+        if admin_profit > 100:
+            admin_profit = 100
+
         #считаем сколько получает пользователь в секунду
         passive_income = clean_passive_income * admin_profit / 100
         #считаем, сколько он получил

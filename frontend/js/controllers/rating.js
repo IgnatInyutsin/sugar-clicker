@@ -23,6 +23,9 @@ main.controller('rating', function ($scope, $http, $location, $cookies) {
                 for (j=0; j<$scope.userList[i].admins.length; j++) {
                     $scope.userList[i].adminsProfit = $scope.userList[i].adminsProfit + $scope.userList[i].admins[j].count * $scope.userList[i].admins[j].admin.profit;
                 }
+                if ($scope.userList[i].adminsProfit > 100) { //максимум - 100%
+                    $scope.userList[i].adminsProfit = 100;
+                }
                 $scope.userList[i].passive_income = $scope.userList[i].passiveIncome * $scope.userList[i].adminsProfit / 100;
             }
             //сортируем по сахару за все время по убыванию
