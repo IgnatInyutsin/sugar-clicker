@@ -48,7 +48,6 @@ class AdminsGroupViewSet(mixins.CreateModelMixin,
             if int(user.balance) >= int(admin.cost) * int(request.data['count']):
                 # если да - снимаем нужную сумму с баланса
                 user_for_update.update(balance=(int(user.balance) - (int(admin.cost) * int(request.data['count']) )))
-                return Response(request.data)
             else:
                 # иначе - ошибка
                 raise ValidationError([{'code': 'SMALL_BALANCE', 'text': 'You do not have money'}])
