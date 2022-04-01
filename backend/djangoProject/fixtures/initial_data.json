@@ -138,7 +138,7 @@
     "model": "djangoProject.provider",
     "pk": 10,
     "fields": {
-      "name": "Продавец говна",
+      "name": "Doggy",
       "cost": 92160,
       "income": 512
     }
