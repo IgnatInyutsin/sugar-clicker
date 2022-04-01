@@ -79,19 +79,13 @@ main.controller('registration', function ($scope, $http, $location, $cookies) {
                 if (xhr.responseJSON.email != undefined) {
                     if (xhr.responseJSON.email[0] == "Enter a valid email address.") {
                         document.querySelector("footer").insertAdjacentHTML('afterbegin', '<div class="alert alert-danger fade show" role="alert" style="position: fixed; left: 0; bottom: 0; width: 100%; display: flex; justify-content: space-between">\n' +
-                            '    <strong>Ошибка почты</strong> Введите настоящую почту\n' +
-                            '    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>\n' +
-                            '</div>');
-                    }
-                    if (xhr.responseJSON.email[0] == "Enter a valid email address.") {
-                        document.querySelector("footer").insertAdjacentHTML('afterbegin', '<div class="alert alert-danger fade show" role="alert" style="position: fixed; left: 0; bottom: 0; width: 100%; display: flex; justify-content: space-between">\n' +
-                            '    <strong>Ошибка почты</strong> Введите настоящую почту\n' +
+                            '    Введите настоящую почту\n' +
                             '    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>\n' +
                             '</div>');
                     }
                     if (xhr.responseJSON.email[0] == 'user with this email already exists.') {
                         document.querySelector("footer").insertAdjacentHTML('afterbegin', '<div class="alert alert-danger fade show" role="alert" style="position: fixed; left: 0; bottom: 0; width: 100%; display: flex; justify-content: space-between">\n' +
-                            '    <strong>Ошибка почты</strong> Данный адрес уже занят, введите уникальный\n' +
+                            '    Данный адрес уже занят, введите уникальный\n' +
                             '    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>\n' +
                             '</div>');
                     }
@@ -100,12 +94,12 @@ main.controller('registration', function ($scope, $http, $location, $cookies) {
                 if (xhr.responseJSON.name != undefined) {
                     if (xhr.responseJSON.name[0] == "user with this name already exists.") {
                         document.querySelector("footer").insertAdjacentHTML('afterbegin', '<div class="alert alert-danger fade show" role="alert" style="position: fixed; left: 0; bottom: 0; width: 100%; display: flex; justify-content: space-between">\n' +
-                            '    <strong>Ошибка имени</strong> Это имя уже занято, введите уникальное\n' +
+                            '    Это имя уже занято, введите уникальное\n' +
                             '    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>\n' +
                             '</div>');
                     } else {
                         document.querySelector("footer").insertAdjacentHTML('afterbegin', '<div class="alert alert-danger fade show" role="alert" style="position: fixed; left: 0; bottom: 0; width: 100%; display: flex; justify-content: space-between">\n' +
-                            '    <strong>Ошибка имени</strong> Слишком длинное имя, макс. 256 символов /n' +
+                            '    Слишком длинное имя, макс. 256 символов /n' +
                             '    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>\n' +
                             '</div>');
                     }

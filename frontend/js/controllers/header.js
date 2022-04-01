@@ -14,10 +14,26 @@ main.controller('header', function ($scope, $http, $location, $cookies) {
                 $scope.userName = data.name
                 $scope.balance = data.balance
             }
-        })
-        $scope.messageForUser = "Баланс " + $scope.userName + ": " + $scope.balance
+        });
+        // данные для строки баланса
+        $scope.messageForUser = "Баланс " + $scope.userName + ": " + $scope.balance;
+        // делаем их обновляемыми
+        setInterval(function () {
+            $.ajax({
+                url: urls.domain + 'user/list/' + $cookies.get('user_id') + "/",
+                method: 'get',
+                datatype: 'application/json',
+                async: false,
+                success: function (data) {
+                    $scope.userName = data.name
+                    $scope.balance = data.balance
+                }
+            });
+            $scope.messageForUser = "Баланс " + $scope.userName + ": " + $scope.balance;
+            $scope.$apply();
+        }, 5000);
     } else {
-        $scope.messageForUser = "Режим гостя, войдите в аккаунт"
+        $scope.messageForUser = "Режим гостя, войдите в аккаунт";
     }
 
     // проверка заполненности полей входа
@@ -67,7 +83,7 @@ main.controller('header', function ($scope, $http, $location, $cookies) {
                 try {
                     if (xhr.responseJSON[0].code == "MISSING_IN_DB_EMAIL") {
                         document.querySelector("footer").insertAdjacentHTML('afterbegin', '<div class="alert alert-danger fade show" role="alert" style="position: fixed; left: 0; bottom: 0; width: 100%; display: flex; justify-content: space-between">\n' +
-                            '    <strong>Ошибка почты</strong> Данный Email не зарегистрирован \n' +
+                            '    Данный Email не зарегистрирован \n' +
                             '    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>\n' +
                             '</div>')
                     }
@@ -76,7 +92,7 @@ main.controller('header', function ($scope, $http, $location, $cookies) {
                 try {
                     if (xhr.responseJSON.email[0] == 'Enter a valid email address.') {
                         document.querySelector("footer").insertAdjacentHTML('afterbegin', '<div class="alert alert-danger fade show" role="alert" style="position: fixed; left: 0; bottom: 0; width: 100%; display: flex; justify-content: space-between">\n' +
-                            '    <strong>Ошибка почты</strong> Пожалуйста, введите корректный Email \n' +
+                            '    Пожалуйста, введите корректный Email \n' +
                             '    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>\n' +
                             '</div>');
                     }
@@ -94,7 +110,8 @@ main.controller('header', function ($scope, $http, $location, $cookies) {
                 try {
                     if (xhr.responseJSON[0].code == 'ACCOUNT_NOT_ACTIVATED') {
                         document.querySelector("footer").insertAdjacentHTML('afterbegin', '<div class="alert alert-danger fade show" role="alert" style="position: fixed; left: 0; bottom: 0; width: 100%; display: flex; justify-content: space-between">\n' +
-                            '    <strong>Ошибка аккаунта</strong> Аккаунт не активирован. Проверьте свою почту. \n' +
+                            '    ' +
+                            'Аккаунт не активирован. Проверьте свою почту. \n' +
                             '    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>\n' +
                             '</div>');
                     }

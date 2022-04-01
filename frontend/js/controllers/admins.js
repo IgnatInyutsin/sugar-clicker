@@ -7,6 +7,8 @@ main.controller('admins', function ($scope, $http, $location, $cookies) {
     if ($scope.login) {
         let checker = new Api();
         checker.checkSession($cookies.get('session'), $cookies.get('user_id'))
+    } else {
+        location.hash = "!/faq/"
     }
 
     //делаем get запроcы
@@ -36,7 +38,7 @@ main.controller('admins', function ($scope, $http, $location, $cookies) {
         //проверяем, заполнена ли форма к-ва штук
         if (document.getElementById("cost" + id).value == '') {
             document.querySelector("footer").insertAdjacentHTML('afterbegin', '<div class="alert alert-danger fade show" role="alert" style="position: fixed; left: 0; bottom: 0; width: 100%; display: flex; justify-content: space-between">\n' +
-                '    <strong>Ошибка количества</strong> Введите количество штук \n' +
+                '    Введите количество штук покупаемых админов\n' +
                 '    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>\n' +
                 '</div>');
             return undefined;
@@ -70,7 +72,7 @@ main.controller('admins', function ($scope, $http, $location, $cookies) {
             error: function (xhr) {
                 if (xhr.responseJSON[0].code == 'SMALL_BALANCE') {
                     document.querySelector("footer").insertAdjacentHTML('afterbegin', '<div class="alert alert-danger fade show" role="alert" style="position: fixed; left: 0; bottom: 0; width: 100%; display: flex; justify-content: space-between">\n' +
-                        '    <strong>Ошибка баланса</strong> Недостаточно денег для покупки! \n' +
+                        '    Недостаточно денег для покупки! \n' +
                         '    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>\n' +
                         '</div>');
                 }

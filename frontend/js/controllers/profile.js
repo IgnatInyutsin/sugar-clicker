@@ -1,10 +1,6 @@
 main.controller('profile', function ($scope, $http, $location, $cookies, $routeParams) {
     //контроллер страницы profile
     $scope.$parent.pageName = 'profile';
-    if ($scope.login) {
-        let checker = new Api();
-        checker.checkSession($cookies.get('session'), $cookies.get('user_id'))
-    }
     let urls = new BackendConnector();
 
     // получаем данные о пользователе
