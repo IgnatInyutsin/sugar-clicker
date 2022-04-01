@@ -51,7 +51,7 @@ main.controller('providers', function ($scope, $http, $location, $cookies) {
             success: function (data) {
                 console.log(data)
                 document.querySelector("footer").insertAdjacentHTML('afterbegin', '<div class="alert alert-success fade show" role="alert" style="position: fixed; left: 0; bottom: 0; width: 100%; display: flex; justify-content: space-between">\n' +
-                    '    Вы успешно преобрели' + document.getElementById("cost" + id).value +  ' Поставщик(а/ов) \n' +
+                    '    Вы успешно преобрели ' + document.getElementById("cost" + id).value +  ' поставщик(а/ов) \n' +
                     '    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>\n' +
                     '</div>');
 
