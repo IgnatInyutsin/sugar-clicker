@@ -18,7 +18,7 @@ class AuthViewSet(mixins.RetrieveModelMixin,
     def retrieve(self, request, pk):
         # проверка на соответствие auth-токена
         if not User.objects.all().filter(auth=pk).exists():
-            raise ValidationError("Токен не действителен")
+            raise ValidationError("Токен не действителен, возможно, ваш аккаунт уже активирован")
         else:
             User.objects.all().filter(auth=pk).update(auth=None, is_auth=True)
             return Response(data="Активация прошла успешно! Вы можете зайти в свой аккаунт.")

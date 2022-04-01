@@ -8,6 +8,8 @@ import time
 from django.core import serializers
 import uuid
 from djangoProject.app.user.passive_income.views import PassiveIncomeViewSet
+from django.db import transaction
+
 
 # Класс для запросов по AdminsGroup, доступен только POST и GET
 class AdminsGroupViewSet(mixins.CreateModelMixin,
@@ -26,6 +28,7 @@ class AdminsGroupViewSet(mixins.CreateModelMixin,
             return AdminsGroupGetSerializer
 
     # метод POST
+    @transaction.atomic
     def create(self, request):
         # Получаем наш сериализатор
         serializer = self.get_serializer(data=request.data)

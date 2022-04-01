@@ -10,6 +10,7 @@ from django.core import serializers
 from rest_framework.renderers import JSONRenderer
 import uuid
 from djangoProject.app.user.passive_income.views import PassiveIncomeViewSet
+from django.db import transaction
 
 # Класс для запросов по ProvidersGroup, доступен только POST и GET
 class ProvidersGroupViewSet(mixins.CreateModelMixin,
@@ -29,6 +30,7 @@ class ProvidersGroupViewSet(mixins.CreateModelMixin,
             return ProvidersGroupGetSerializer
 
     # метод POST
+    @transaction.atomic
     def create(self, request):
         # Получаем наш сериализатор
         serializer = self.get_serializer(data=request.data)

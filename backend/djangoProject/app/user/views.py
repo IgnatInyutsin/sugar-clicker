@@ -73,8 +73,8 @@ class UserViewSet(mixins.CreateModelMixin,
 
             # если прошел валидацию обновляем баланс
             user = User.objects.all().filter(id=pk)
-            user.update(balance = int(user[0].balance) + int(request.data["balance"]))
-            user.update(sugar_all_time=int(user[0].sugar_all_time) + int(request.data["balance"]))
+            user.update(balance = int(user[0].balance) + int(request.data["balance"]),
+                        sugar_all_time=int(user[0].sugar_all_time) + int(request.data["balance"]))
 
             # ответ
             return Response(status=201, data={"code": "SUCCESS_UPDATE_BALANCE", "text": "Your balance are updated"})
@@ -96,8 +96,8 @@ class UserViewSet(mixins.CreateModelMixin,
                 raise ValidationError([{"code": "WRONG_SESSION_UUID", "text": "my_session_uuid is wrong"}])
 
             # если прошел валидацию обновляем баланс
-            user = User.objects.all().filter(id=pk)
-            user.update(balance=int(user[0].balance) + int(request.data["balance"]))
+            user.update(balance=int(user[0].balance) + int(request.data["balance"]),
+                        sugar_all_time=int(user[0].sugar_all_time) + int(request.data["balance"]))
 
             # ответ
             return Response(status=201, data={"code": "SUCCESS_UPDATE_BALANCE", "text": "Your balance are updated"})
