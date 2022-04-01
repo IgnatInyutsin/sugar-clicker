@@ -23,9 +23,6 @@ main.controller('profile', function ($scope, $http, $location, $cookies, $routeP
             for (i=0; i<$scope.aboutUser.admins.length; i++) {
                 $scope.adminsProfit = $scope.adminsProfit + $scope.aboutUser.admins[i].count * $scope.aboutUser.admins[i].admin.profit
             }
-            if ($scope.adminsProfit > 100) { //максимум - 100%
-                $scope.adminsProfit = 100
-            }
             //отправляем в $scope
             $scope.$apply();
             console.log(data);

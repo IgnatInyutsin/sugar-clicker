@@ -57,7 +57,7 @@ main.controller('providers', function ($scope, $http, $location, $cookies) {
                     '    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>\n' +
                     '</div>');
 
-                document.getElementById('cost' + id).value = ''
+                document.getElementById('cost' + id).value = '';
 
                 $.ajax({ // достаем наш баланс
                     url: urls.domain + "user/list/" + $cookies.get("user_id") + "/",
