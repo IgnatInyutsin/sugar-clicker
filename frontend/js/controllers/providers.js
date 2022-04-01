@@ -76,6 +76,12 @@ main.controller('providers', function ($scope, $http, $location, $cookies) {
                         '    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>\n' +
                         '</div>');
                 }
+                if (xhr.responseJSON[0].code == 'MAX_COUNT') {
+                    document.querySelector("footer").insertAdjacentHTML('afterbegin', '<div class="alert alert-danger fade show" role="alert" style="position: fixed; left: 0; bottom: 0; width: 100%; display: flex; justify-content: space-between">\n' +
+                        '    Максимальное количество поставщиков этого типа - ' + xhr.responseJSON[0].max_count +'\n' +
+                        '    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>\n' +
+                        '</div>');
+                }
             }
         });
     }

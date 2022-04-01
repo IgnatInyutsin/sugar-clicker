@@ -65,6 +65,13 @@ class ProvidersGroupViewSet(mixins.CreateModelMixin,
                 providersGroup.save()
             else:  # иначе обновляем
                 myProvidersGroup = ProvidersGroup.objects.all().filter(user=user).filter(provider=provider)
+                # проверяем max_count
+                if provider.max_count != 0 \
+                    and int(myProvidersGroup[0].count) + int(request.POST["count"]) > provider.max_count:
+                    raise ValidationError([{"code": "MAX_COUNT",
+                                            "text": "Count is very big for this provider",
+                                            "max_count": provider.max_count}])
+
                 myProvidersGroup.update(count=(int(myProvidersGroup[0].count) + int(request.data['count'])))
 
             # если все успешно возвращаем ответ

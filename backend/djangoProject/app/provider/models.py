@@ -8,6 +8,7 @@ class Provider(models.Model):
     name = models.CharField(max_length=256)
     cost = models.IntegerField()
     income = models.IntegerField()
+    max_count = models.IntegerField()
 
     def __str__(self):
         return self.name

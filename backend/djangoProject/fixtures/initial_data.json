@@ -23,7 +23,7 @@
     "fields": {
       "name": "Стажер",
       "cost": 680,
-      "profit": 4
+      "profit": 3
     }
   },
   {
@@ -32,7 +32,7 @@
     "fields": {
       "name": "Работник за еду",
       "cost": 1360,
-      "profit": 8
+      "profit": 4
     }
   },
   {
@@ -41,7 +41,7 @@
     "fields": {
       "name": "Подрабатывает между парами",
       "cost": 2720,
-      "profit": 16
+      "profit": 6
     }
   },
   {
@@ -50,7 +50,34 @@
     "fields": {
       "name": "Самостоятельно читал документацию",
       "cost": 5160,
-      "profit": 32
+      "profit": 10
+    }
+  },
+  {
+    "model": "djangoProject.admin",
+    "pk": 7,
+    "fields": {
+      "name": "Мамин хацкер",
+      "cost": 10240,
+      "profit": 15
+    }
+  },
+  {
+    "model": "djangoProject.admin",
+    "pk": 8,
+    "fields": {
+      "name": "Разработчик игр в консоли",
+      "cost": 20400,
+      "profit": 22
+    }
+  },
+  {
+    "model": "djangoProject.admin",
+    "pk": 9,
+    "fields": {
+      "name": "Bongo Cat",
+      "cost": 40720,
+      "profit": 34
     }
   },
   {
@@ -59,7 +86,8 @@
     "fields": {
       "name": "Бабушка-перекуп",
       "cost": 180,
-      "income": 1
+      "income": 1,
+      "max_count": 100
     }
   },
   {
@@ -67,8 +95,9 @@
     "pk": 2,
     "fields": {
       "name": "Мамкин бизнесмен",
-      "cost": 360,
-      "income": 2
+      "cost": 350,
+      "income": 2,
+      "max_count": 77
     }
   },
   {
@@ -76,8 +105,9 @@
     "pk": 3,
     "fields": {
       "name": "Барыга с Авито",
-      "cost": 720,
-      "income": 4
+      "cost": 700,
+      "income": 4,
+      "max_count": 77
     }
   },
   {
@@ -85,8 +115,9 @@
     "pk": 4,
     "fields": {
       "name": "ООО 'Ватиканская грядочка'",
-      "cost": 1440,
-      "income": 8
+      "cost": 1400,
+      "income": 60,
+      "max_count": 66
     }
   },
   {
@@ -94,8 +125,9 @@
     "pk": 5,
     "fields": {
       "name": "Мексиканский сахаро-корель",
-      "cost": 2880,
-      "income": 16
+      "cost": 2800,
+      "income": 16,
+      "max_count": 45
     }
   },
   {
@@ -103,8 +135,9 @@
     "pk": 6,
     "fields": {
       "name": "Немамкин бизнесмен",
-      "cost": 5760,
-      "income": 32
+      "cost": 5660,
+      "income": 32,
+      "max_count": 35
     }
   },
   {
@@ -112,8 +145,9 @@
     "pk": 7,
     "fields": {
       "name": "Купил курсы по бизнесу за 5 рублей",
-      "cost": 11520,
-      "income": 64
+      "cost": 11400,
+      "income": 64,
+      "max_count": 26
     }
   },
   {
@@ -122,7 +156,8 @@
     "fields": {
       "name": "Жак Фреско",
       "cost": 23040,
-      "income": 128
+      "income": 128,
+      "max_count": 100
     }
   },
   {
@@ -131,7 +166,8 @@
     "fields": {
       "name": "Солевая сова",
       "cost": 46080,
-      "income": 256
+      "income": 192,
+      "max_count": 100
     }
   },
   {
@@ -140,7 +176,8 @@
     "fields": {
       "name": "Doggy",
       "cost": 92160,
-      "income": 512
+      "income": 288,
+      "max_count": 100
     }
   },
   {
@@ -149,7 +186,8 @@
     "fields": {
       "name": "Джо Бидон",
       "cost": 184320,
-      "income": 1024
+      "income": 432,
+      "max_count": 100
     }
   },
   {
@@ -158,7 +196,8 @@
     "fields": {
       "name": "Big Shlepa",
       "cost": 368640,
-      "income": 2048
+      "income": 648,
+      "max_count": 100
     }
   },
   {
@@ -167,7 +206,8 @@
     "fields": {
       "name": "Понасенков",
       "cost": 1474560,
-      "income": 4096
+      "income": 972,
+      "max_count": 100
     }
   },
   {
@@ -176,7 +216,8 @@
     "fields": {
       "name": "Продавец говна",
       "cost": 5898240,
-      "income": 8192
+      "income": 1458,
+      "max_count": 100
     }
   },
   {
@@ -185,7 +226,8 @@
     "fields": {
       "name": "Абдурозик",
       "cost": 23592960,
-      "income": 16384
+      "income": 2187,
+      "max_count": 100
     }
   },
   {
@@ -194,7 +236,8 @@
     "fields": {
       "name": "Хасбик",
       "cost": 94371840,
-      "income": 32768
+      "income": 3280,
+      "max_count": 0
     }
   }
 ]
