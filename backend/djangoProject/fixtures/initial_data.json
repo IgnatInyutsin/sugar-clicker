@@ -178,5 +178,23 @@
       "cost": 5898240,
       "income": 8192
     }
+  },
+  {
+    "model": "djangoProject.provider",
+    "pk": 15,
+    "fields": {
+      "name": "Абдурозик",
+      "cost": 23592960,
+      "income": 16384
+    }
+  },
+  {
+    "model": "djangoProject.provider",
+    "pk": 16,
+    "fields": {
+      "name": "Хасбик",
+      "cost": 94371840,
+      "income": 32768
+    }
   }
 ]
