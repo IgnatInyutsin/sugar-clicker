@@ -165,15 +165,6 @@
     "model": "djangoProject.provider",
     "pk": 13,
     "fields": {
-      "name": "Big Shlepa",
-      "cost": 368640,
-      "income": 2048
-    }
-  },
-  {
-    "model": "djangoProject.provider",
-    "pk": 14,
-    "fields": {
       "name": "Понасенков",
       "cost": 1474560,
       "income": 4096
@@ -181,7 +172,7 @@
   },
   {
     "model": "djangoProject.provider",
-    "pk": 15,
+    "pk": 14,
     "fields": {
       "name": "Продавец говна",
       "cost": 5898240,
