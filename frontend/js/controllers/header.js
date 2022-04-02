@@ -81,7 +81,7 @@ main.controller('header', function ($scope, $http, $location, $cookies) {
             error: function (xhr) {
                 console.log(xhr);
                 try {
-                    if (xhr.responseJSON[0].code == "MISSING_IN_DB_EMAIL") {
+                    if (xhr.responseJSON.email.code == "MISSING_IN_DB_EMAIL") {
                         document.querySelector("footer").insertAdjacentHTML('afterbegin', '<div class="alert alert-danger fade show" role="alert" style="position: fixed; left: 0; bottom: 0; width: 100%; display: flex; justify-content: space-between">\n' +
                             '    Данный Email не зарегистрирован \n' +
                             '    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>\n' +
@@ -108,7 +108,7 @@ main.controller('header', function ($scope, $http, $location, $cookies) {
                 } catch (e) {}
 
                 try {
-                    if (xhr.responseJSON[0].code == 'ACCOUNT_NOT_ACTIVATED') {
+                    if (xhr.responseJSON.email.code == 'ACCOUNT_NOT_ACTIVATED') {
                         document.querySelector("footer").insertAdjacentHTML('afterbegin', '<div class="alert alert-danger fade show" role="alert" style="position: fixed; left: 0; bottom: 0; width: 100%; display: flex; justify-content: space-between">\n' +
                             '    ' +
                             'Аккаунт не активирован. Проверьте свою почту. \n' +

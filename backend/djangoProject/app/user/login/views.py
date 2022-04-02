@@ -3,7 +3,6 @@ from rest_framework.response import Response
 from djangoProject.app.user.login.serializers import LoginSerializer
 from djangoProject.app.user.models import User
 from rest_framework.serializers import ValidationError
-from django.core.validators import validate_email
 from django.core import serializers
 
 # класс для запросов на логин пользователей
@@ -19,17 +18,8 @@ class LoginViewSet(mixins.CreateModelMixin,
         # Проверяем, все ли поля прошли валидацию
         if serializer.is_valid(raise_exception=True) or \
                 (not serializer.is_valid(raise_exception=True)  \
-                 and serializer.errors.get("email", [0]) == 'user with this email already exists.' \
+                 and serializer.errors.get("email", [0])[0] == 'user with this email already exists.' \
                  and not "balance", "session_uuid" in serializer.errors):
-
-
-            # проверяем ее наличие в базе данных
-            if not User.objects.all().filter(email=request.data["email"]).exists():
-                raise ValidationError([{"code": "MISSING_IN_DB_EMAIL", "text": "Email absent in database"}])
-
-            # проверяем активацию аккаунта
-            if not User.objects.get(email=request.data["email"]).is_auth:
-                raise ValidationError([{"code": "ACCOUNT_NOT_ACTIVATED", "text": "Account is not activated"}])
 
             # проверяем соответствие кэшей пароля
             if User.objects.get(email=request.data["email"]).pass_cache != request.data["pass_cache"]:
