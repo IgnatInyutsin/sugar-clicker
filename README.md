@@ -59,7 +59,7 @@ Sugar Clicker - веб-игра с открытым исходным кодом 
     DJANGO_LOGGING_LEVEL=INFO
     DJANGO_REQUEST_LOGGING_LEVEL=DEBUG
   Здесь укажите настройки DJANGO. DJANGO_SECRETKEY отвечает за заполнение SECRET_KEY в backend/djangoProject/settings.py. Сделайте его наиболее сложным, чтобы защитить свое приложение. DJANGO_DEBUG, если значение установлено 1, включит режим DEBUG у DJANGO. Если вы планируете его держать в публичном доступе, лучше установить 0, которое отключит режим DEBUG.
-  DJANGO_LOGGING_LEVEL и DJANGO_REQUEST_LOGGING_LEVEL принимают значения: DEBUG, INFO, ERROR, FATAL. Подробнее про уровни логгирования вы можете почитать [в официальной документации](https://docs.djangoproject.com/en/4.0/topics/logging/#loggers). DJANGO_LOGGING_LEVEL отвечает за логгирование самим DJANGO, а DJANGO_REQUEST_LOGGING_LEVEL за логгирование HTTP/HTTPS запросов.
+  DJANGO_LOGGING_LEVEL и DJANGO_REQUEST_LOGGING_LEVEL принимают значения: DEBUG, INFO, WARNING, ERROR, FATAL. Подробнее про уровни логгирования вы можете почитать [в официальной документации](https://docs.djangoproject.com/en/4.0/topics/logging/#loggers). DJANGO_LOGGING_LEVEL отвечает за логгирование самим DJANGO, а DJANGO_REQUEST_LOGGING_LEVEL за логгирование HTTP/HTTPS запросов.
  
     SMTP_HOST=smtp.yandex.ru
     SMTP_PORT=465
