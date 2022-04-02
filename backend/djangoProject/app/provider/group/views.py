@@ -36,13 +36,6 @@ class ProvidersGroupViewSet(mixins.CreateModelMixin,
         serializer = self.get_serializer(data=request.data)
         # Проверяем, все ли поля прошли валидацию
         if serializer.is_valid(raise_exception=True):
-            # проверяем, актуальны ли admin_id и session_uuid (это должна сделать валидация в сериализаторе,
-            # но она не работает, так что пусть сделает здесь)
-            if not User.objects.all().filter(session_uuid=uuid.UUID(request.POST['user.session_uuid'])).exists():
-                raise ValidationError([{"code": "SESSION_UUID_UNDEFINED", "text": "session_uuid in undefinded"}])
-            if not Provider.objects.all().filter(id=request.POST['provider.id']).exists():
-                raise ValidationError([{"code": "PROVIDER_ID_UNDEFINED", "text": "provider_id in undefinded"}])
-
             # по session_id соединяем с User
             user_for_update = User.objects.all().filter(session_uuid=request.POST['user.session_uuid'])
             user = User.objects.all().filter(session_uuid=request.POST['user.session_uuid'])[0]

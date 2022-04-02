@@ -33,4 +33,4 @@ class UserRegistrationSerializer(serializers.HyperlinkedModelSerializer):
 class UserBalanceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ['session_uuid', 'balance']
+        fields = ['session_uuid', 'balance', 'id']

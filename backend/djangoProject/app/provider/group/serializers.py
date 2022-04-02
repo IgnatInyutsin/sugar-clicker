@@ -2,12 +2,14 @@ from rest_framework import serializers
 from djangoProject.app.provider.models import ProvidersGroup, Provider
 from djangoProject.app.user.models import User
 from rest_framework.serializers import ValidationError
+from djangoProject.app.validators.session_uuid_validation import validate_session_uuid
+from djangoProject.app.validators.provider_id_validation import validate_provider_id
 
 
 # Дополнительные сериализаторы для вложенности в POST
 class UserBuyProviderSerializer(serializers.HyperlinkedModelSerializer):
     balance = serializers.IntegerField(read_only=True)
-    session_uuid =  serializers.CharField(write_only=True)
+    session_uuid =  serializers.CharField(write_only=True, validators=[validate_session_uuid])
     last_passive_income_data = serializers.IntegerField(read_only=True)
     id = serializers.IntegerField(read_only=True)
 
@@ -17,7 +19,7 @@ class UserBuyProviderSerializer(serializers.HyperlinkedModelSerializer):
 
 class ProviderBuyProviderSerializer(serializers.HyperlinkedModelSerializer):
     cost = serializers.IntegerField(read_only=True)
-    id = serializers.IntegerField(write_only=True)
+    id = serializers.IntegerField(write_only=True, validators=[validate_provider_id])
 
     class Meta:
         model = Provider

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from djangoProject.app.admin.models import AdminsGroup, Admin
 from djangoProject.app.user.models import User
-from djangoProject.app.validators.user_id_validation import validate_user_id
+from djangoProject.app.validators.session_uuid_validation import validate_session_uuid
 from djangoProject.app.validators.admin_id_validation import validate_admin_id
 from rest_framework.serializers import ValidationError
 
@@ -9,9 +9,9 @@ from rest_framework.serializers import ValidationError
 # Дополнительные сериализаторы для вложенности в post
 class UserBuyAdminSerializer(serializers.HyperlinkedModelSerializer):
     balance = serializers.IntegerField(read_only=True)
-    session_uuid =  serializers.CharField(write_only=True)
+    session_uuid =  serializers.CharField(write_only=True, validators=[validate_session_uuid])
     last_passive_income_data = serializers.IntegerField(read_only=True)
-    id = serializers.IntegerField(read_only=True, validators=[validate_user_id])
+    id = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = User

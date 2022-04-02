@@ -3,11 +3,11 @@ from rest_framework.response import Response
 from djangoProject.app.user.serializers import UserSerializer, UserBalanceSerializer, UserRegistrationSerializer
 from djangoProject.app.user.models import User
 from rest_framework.serializers import ValidationError
-from djangoProject.app.validators.uuid_validation import validate_uuid
 from rest_framework.decorators import api_view
 from django.core.mail import send_mail
 import uuid
 import os
+from django.db import transaction
 
 #класс для запросов на пользователей
 class UserViewSet(mixins.CreateModelMixin,
@@ -58,9 +58,14 @@ class UserViewSet(mixins.CreateModelMixin,
         raise ValidationError(serializer.errors)
 
     # обновление баланса
+    @transaction.atomic
     def partial_update(self, request, pk):
         # Получаем наш сериализатор
-        serializer = self.get_serializer(data=request.data)
+        serializer = self.get_serializer(data={
+            "id": pk,
+            "session_uuid": request.data.get("session_uuid", False),
+            "balance": request.data.get("balance", False)
+        })
         # Проверяем, все ли поля прошли валидацию
         if serializer.is_valid(raise_exception=True):
             # проверяем наличие пользователя с этим id
@@ -82,9 +87,14 @@ class UserViewSet(mixins.CreateModelMixin,
         raise ValidationError(serializer.errors)
 
     # обновление баланса
+    @transaction.atomic
     def update(self, request, pk):
         # Получаем наш сериализатор
-        serializer = self.get_serializer(data=request.data)
+        serializer = self.get_serializer(data={
+            "id": pk,
+            "session_uuid": request.data.get("session_uuid", False),
+            "balance": request.data.get("balance", False)
+        })
         # Проверяем, все ли поля прошли валидацию
         if serializer.is_valid(raise_exception=True):
             # проверяем наличие пользователя с этим id
