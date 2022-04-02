@@ -56,6 +56,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     "django.middleware.common.CommonMiddleware",
+    'request_logging.middleware.LoggingMiddleware',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -78,6 +79,43 @@ TEMPLATES = [
         },
     },
 ]
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'simple': {
+            'format': '{asctime} | {levelname} | {module} | {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'request_file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'djangoProject/logs/request.log',
+            'formatter': 'simple'
+        },
+        'django_file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': 'djangoProject/logs/django.log',
+            'formatter': 'simple'
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['request_file'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'django': {
+            'handlers': ['django_file'],
+            'level': 'INFO',
+            'propagate': True,
+        }
+    },
+}
 
 WSGI_APPLICATION = 'djangoProject.wsgi.application'
 

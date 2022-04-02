@@ -3,3 +3,4 @@ djangorestframework
 psycopg2
 tzdata
 django-cors-headers
+django-request-logging
