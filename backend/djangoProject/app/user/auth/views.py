@@ -26,3 +26,5 @@ class AuthViewSet(mixins.RetrieveModelMixin,
             else:
                 User.objects.all().filter(auth=pk).update(auth=None, is_auth=True)
                 return Response(data="Активация прошла успешно! Вы можете зайти в свой аккаунт.")
+
+        raise ValidationError(serializer.errors)
