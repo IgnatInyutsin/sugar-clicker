@@ -91,13 +91,13 @@ LOGGING = {
     },
     'handlers': {
         'request_file': {
-            'level': 'DEBUG',
+            'level': os.environ.get("DJANGO_REQUEST_LOGGING_LEVEL"),
             'class': 'logging.FileHandler',
             'filename': 'djangoProject/logs/request.log',
             'formatter': 'simple'
         },
         'django_file': {
-            'level': 'INFO',
+            'level': os.environ.get("DJANGO_LOGGING_LEVEL"),
             'class': 'logging.FileHandler',
             'filename': 'djangoProject/logs/django.log',
             'formatter': 'simple'
@@ -106,12 +106,12 @@ LOGGING = {
     'loggers': {
         'django.request': {
             'handlers': ['request_file'],
-            'level': 'DEBUG',
+            'level': os.environ.get("DJANGO_REQUEST_LOGGING_LEVEL"),
             'propagate': False,
         },
         'django': {
             'handlers': ['django_file'],
-            'level': 'INFO',
+            'level': os.environ.get("DJANGO_LOGGING_LEVEL"),
             'propagate': True,
         }
     },
