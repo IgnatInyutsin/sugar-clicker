@@ -60,7 +60,7 @@
       <tbody ng-repeat="user in userList">
       <tr>
         <td>{{user.number}}</td>
-        <td>{{user.name}}</td>
+        <td><a href="!/profile/{{user.id}}">{{user.name}}</a></td>
         <td>{{user.sugar_all_time}} пакет(а/ов)</td>
         <td>{{user.balance}} пакет(а/ов)</td>
         <td>{{user.passive_income}} пакет(а/ов)/сек</td>
